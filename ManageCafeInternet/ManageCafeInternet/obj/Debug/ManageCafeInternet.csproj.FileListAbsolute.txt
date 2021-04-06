@@ -1,0 +1,10 @@
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\bin\Debug\ManageCafeInternet.exe.config
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\bin\Debug\ManageCafeInternet.exe
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\bin\Debug\ManageCafeInternet.pdb
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Properties.Resources.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.GenerateResource.cache
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.exe
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.pdb
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Form2.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csprojAssemblyReference.cache

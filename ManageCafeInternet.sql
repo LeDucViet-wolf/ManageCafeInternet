@@ -1,4 +1,4 @@
-CREATE DATABASE ManageCafeInternet
+﻿CREATE DATABASE ManageCafeInternet
 GO
 USE ManageCafeInternet
 GO
@@ -18,8 +18,7 @@ GO
 CREATE TABLE [role]
 (
 	entity_id INT PRIMARY KEY IDENTITY,
-	name NVARCHAR(255) NOT NULL,
-	status TINYINT NOT NULL
+	name NVARCHAR(255) NOT NULL
 )
 GO
 CREATE TABLE [food]
@@ -36,8 +35,8 @@ GO
 CREATE TABLE [user]
 (
 	entity_id INT PRIMARY KEY IDENTITY,
-	account NVARCHAR(255) NOT NULL,
-	password NVARCHAR(255) NOT NULL,
+	account VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
 	firstName NVARCHAR(255),
 	lastName NVARCHAR(255) NOT NULL,
 	role_id INT NOT NULL,
@@ -67,3 +66,11 @@ CREATE TABLE [order]
 	computer_status_id INT NOT NULL,
 	FOREIGN KEY (computer_status_id) REFERENCES [computer_status](entity_id)
 )
+GO 
+INSERT INTO [role] VALUES
+	(N'admin'),
+	(N'vendor')
+GO
+INSERT INTO [user] VALUES
+	(N'admin','admin123',N'Lê Đức',N'Việt',1),
+	(N'vendor 1','vendor1',N'Vendor',N'A',2)
