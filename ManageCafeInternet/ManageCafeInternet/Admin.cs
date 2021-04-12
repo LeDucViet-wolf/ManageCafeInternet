@@ -37,7 +37,7 @@ namespace ManageCafeInternet
             {
                 foreach (TabPage t in tctMain.TabPages)
                 {
-                    if (t.Created && tpComputer.Parent == t)
+                    if (t.Created && tpComputer.Parent == null)
                     {
                         tctMain.TabPages.Add(tpComputer);
                     }
@@ -55,7 +55,7 @@ namespace ManageCafeInternet
             {
                 foreach (TabPage t in tctMain.TabPages)
                 {
-                    if (t.Created && tpUsers.Parent == t)
+                    if (t.Created && tpUsers.Parent == null)
                     {
                         tctMain.TabPages.Add(tpUsers);
                     }
