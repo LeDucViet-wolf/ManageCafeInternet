@@ -72,8 +72,8 @@ INSERT INTO [role] VALUES
 	(N'vendor')
 GO
 INSERT INTO [user] VALUES
-	(N'admin','admin123',N'Lê Đức',N'Việt',1),
-	(N'vendor 1','vendor1',N'Vendor',N'A',2)
+	(N'admin','1',N'Lê Đức',N'Việt',1),
+	(N'vendor1','vendor1',N'Vendor',N'A',2)
 GO 
 INSERT INTO [food_type] VALUES
 	(N'Đồ ăn'),

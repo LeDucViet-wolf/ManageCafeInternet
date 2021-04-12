@@ -58,6 +58,7 @@
             this.Controls.Add(this.dgvComputers);
             this.Controls.Add(this.cbxArea);
             this.Name = "ComputerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ComputerForm";
             this.Load += new System.EventHandler(this.ComputerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvComputers)).EndInit();
