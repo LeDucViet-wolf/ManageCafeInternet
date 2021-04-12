@@ -26,7 +26,7 @@ namespace ManageCafeInternet
                 {
                     MessageBox.Show("Hello Admin " + a.firstName.ToString() + " " + a.lastName.ToString());
                     Admin admin = new Admin();
-                    this.Hide();
+                    //this.Hide();
                     admin.Show();
                 }
                 else

@@ -15,6 +15,8 @@ namespace ManageCafeInternet
         public Admin()
         {
             InitializeComponent();
+            tctMain.TabPages.Remove(tpUsers);
+            tctMain.TabPages.Remove(tpComputer);
         }
 
         private void tsmiFoods_Click(object sender, EventArgs e)
@@ -25,8 +27,40 @@ namespace ManageCafeInternet
 
         private void tsmiComputers_Click(object sender, EventArgs e)
         {
-            ComputerForm cf = new ComputerForm();
-            cf.Show();
+            //ComputerForm cf = new ComputerForm();
+            //cf.Show();
+            if (tctMain.TabPages.Count == 0)
+            {
+                tctMain.TabPages.Add(tpComputer);
+            }
+            else
+            {
+                foreach (TabPage t in tctMain.TabPages)
+                {
+                    if (t.Created && tpComputer.Parent == t)
+                    {
+                        tctMain.TabPages.Add(tpComputer);
+                    }
+                }
+            }
+        }
+
+        private void tmsiUsers_Click(object sender, EventArgs e)
+        {
+            if (tctMain.TabPages.Count == 0)
+            {
+                tctMain.TabPages.Add(tpUsers);
+            }
+            else
+            {
+                foreach (TabPage t in tctMain.TabPages)
+                {
+                    if (t.Created && tpUsers.Parent == t)
+                    {
+                        tctMain.TabPages.Add(tpUsers);
+                    }
+                }
+            }
         }
     }
 }

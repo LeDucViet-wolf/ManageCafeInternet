@@ -153,14 +153,47 @@ GO
 CREATE PROC [getAllComputersFromArea]
 @area_id INT 
 AS
-SELECT	[computer].entity_id AS 'computer_id',
-		[computer].name AS 'computer_name',
-		[computer].status,
-		[area].entity_id AS 'computer_area_id',
-		[area].name AS 'area_name',
-		[area].price
+SELECT	[computer].entity_id AS 'Computer Id',
+		[computer].name AS 'Computer Name',
+		[area].name AS 'Area',
+		[area].price,
+		CASE WHEN [computer].status = 0 THEN 'Not using'
+			 WHEN [computer].status = 1 THEN 'Using'
+		END AS 'Computer Status'
 FROM computer
 JOIN area 
 ON computer.area_id = area.entity_id
 WHERE area.entity_id = @area_id
+GO
+CREATE PROC [getAllComputers]
+AS
+SELECT	[computer].entity_id AS 'Computer Id',
+		[computer].name AS 'Computer Name',
+		[area].name AS 'Area',
+		[area].price,
+		CASE WHEN [computer].status = 0 THEN 'Not using'
+			 WHEN [computer].status = 1 THEN 'Using'
+		END AS 'Computer Status'
+FROM computer
+JOIN area 
+ON computer.area_id = area.entity_id
+GO
+CREATE PROC [addComputer]
+@computer_name VARCHAR(255), @area_id INT
+AS
+INSERT INTO [computer](name,status,area_id) VALUES (@computer_name,0, @area_id)
+GO
+CREATE PROC [updateComputer]
+@entity_id INT, @computer_name VARCHAR(255), @area_id INT
+AS
+UPDATE [computer] 
+SET	name = @computer_name, 
+	status = 0,
+	area_id = @area_id
+WHERE entity_id = @entity_id
+GO		
+CREATE PROC [deleteComputer]
+@entity_id INT
+AS
+DELETE [computer] WHERE entity_id = @entity_id
 GO

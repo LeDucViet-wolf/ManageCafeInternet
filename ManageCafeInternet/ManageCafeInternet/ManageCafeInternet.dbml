@@ -70,7 +70,13 @@
       <Association Name="role_user" Member="users" ThisKey="entity_id" OtherKey="role_id" Type="user" />
     </Type>
   </Table>
-  <Function Name="dbo.addFood" Method="addFood">
+  <Function Name="dbo.addComputer" Method="addComputer">
+    <Parameter Name="computer_name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateFood" Method="updateFood">
+    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
     <Parameter Name="price" Type="System.Double" DbType="Float" />
     <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
@@ -78,8 +84,7 @@
     <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.updateFood" Method="updateFood">
-    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.addFood" Method="addFood">
     <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
     <Parameter Name="price" Type="System.Double" DbType="Float" />
     <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
@@ -97,15 +102,23 @@
       <Column Name="area_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getAllComputers" Method="getAllComputers">
+    <ElementType Name="getAllComputersResult">
+      <Column Name="[Computer Id]" Member="Computer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Name]" Member="Computer_Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Status]" Member="Computer_Status" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getAllComputersFromArea" Method="getAllComputersFromArea">
     <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="getAllComputersFromAreaResult">
-      <Column Name="computer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="computer_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="computer_area_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="area_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Id]" Member="Computer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Name]" Member="Computer_Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Status]" Member="Computer_Status" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.getAllFoods" Method="getAllFoods">
@@ -136,5 +149,15 @@
       <Column Name="lastName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.updateComputer" Method="updateComputer">
+    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="computer_name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteComputer" Method="deleteComputer">
+    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>
