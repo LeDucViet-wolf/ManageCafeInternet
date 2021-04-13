@@ -157,10 +157,10 @@ namespace ManageCafeInternet
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateFood")]
-		public int updateFood([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> quantity, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string image, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> foodTypeId)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateUser")]
+		public int updateUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string account, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> roleId)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id, name, price, quantity, image, foodTypeId);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId, account, password, firstName, lastName, roleId);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -171,10 +171,31 @@ namespace ManageCafeInternet
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addUser")]
+		public int addUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string account, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> roleId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, password, firstName, lastName, roleId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComputer")]
+		public int deleteComputer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteFood")]
 		public int deleteFood([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteUser")]
+		public int deleteUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -213,11 +234,32 @@ namespace ManageCafeInternet
 			return ((ISingleResult<getAllFoodTypesResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllRoles")]
+		public ISingleResult<getAllRolesResult> getAllRoles()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<getAllRolesResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllUsersFromRole")]
+		public ISingleResult<getAllUsersFromRoleResult> getAllUsersFromRole([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> role_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), role_id);
+			return ((ISingleResult<getAllUsersFromRoleResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getUser")]
 		public ISingleResult<getUserResult> getUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string account, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string password)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, password);
 			return ((ISingleResult<getUserResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getUserFromRole")]
+		public ISingleResult<getUserFromRoleResult> getUserFromRole([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> roleId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roleId);
+			return ((ISingleResult<getUserFromRoleResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateComputer")]
@@ -227,10 +269,10 @@ namespace ManageCafeInternet
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComputer")]
-		public int deleteComputer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateFood")]
+		public int updateFood([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> quantity, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string image, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> foodTypeId)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id, name, price, quantity, image, foodTypeId);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -1953,6 +1995,166 @@ namespace ManageCafeInternet
 		}
 	}
 	
+	public partial class getAllRolesResult
+	{
+		
+		private int _role_id;
+		
+		private string _role_name;
+		
+		public getAllRolesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL")]
+		public int role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					this._role_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string role_name
+		{
+			get
+			{
+				return this._role_name;
+			}
+			set
+			{
+				if ((this._role_name != value))
+				{
+					this._role_name = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getAllUsersFromRoleResult
+	{
+		
+		private int _entity_id;
+		
+		private string _account;
+		
+		private string _password;
+		
+		private string _firstName;
+		
+		private string _lastName;
+		
+		private string _Role;
+		
+		public getAllUsersFromRoleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entity_id", DbType="Int NOT NULL")]
+		public int entity_id
+		{
+			get
+			{
+				return this._entity_id;
+			}
+			set
+			{
+				if ((this._entity_id != value))
+				{
+					this._entity_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string account
+		{
+			get
+			{
+				return this._account;
+			}
+			set
+			{
+				if ((this._account != value))
+				{
+					this._account = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this._password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firstName", DbType="NVarChar(255)")]
+		public string firstName
+		{
+			get
+			{
+				return this._firstName;
+			}
+			set
+			{
+				if ((this._firstName != value))
+				{
+					this._firstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string lastName
+		{
+			get
+			{
+				return this._lastName;
+			}
+			set
+			{
+				if ((this._lastName != value))
+				{
+					this._lastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="VarChar(6)")]
+		public string Role
+		{
+			get
+			{
+				return this._Role;
+			}
+			set
+			{
+				if ((this._Role != value))
+				{
+					this._Role = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getUserResult
 	{
 		
@@ -2064,6 +2266,50 @@ namespace ManageCafeInternet
 				if ((this._role_id != value))
 				{
 					this._role_id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getUserFromRoleResult
+	{
+		
+		private int _role_id;
+		
+		private string _role_name;
+		
+		public getUserFromRoleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="Int NOT NULL")]
+		public int role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					this._role_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string role_name
+		{
+			get
+			{
+				return this._role_name;
+			}
+			set
+			{
+				if ((this._role_name != value))
+				{
+					this._role_name = value;
 				}
 			}
 		}

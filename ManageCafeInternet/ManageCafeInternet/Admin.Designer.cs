@@ -32,11 +32,7 @@
             this.tsmiFoods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiComputers = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiUsers = new System.Windows.Forms.ToolStripMenuItem();
-            this.tctMain = new System.Windows.Forms.TabControl();
-            this.tpUsers = new System.Windows.Forms.TabPage();
-            this.tpComputer = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
-            this.tctMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -78,43 +74,11 @@
             this.tmsiUsers.Text = "Manage Users";
             this.tmsiUsers.Click += new System.EventHandler(this.tmsiUsers_Click);
             // 
-            // tctMain
-            // 
-            this.tctMain.Controls.Add(this.tpUsers);
-            this.tctMain.Controls.Add(this.tpComputer);
-            this.tctMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tctMain.Location = new System.Drawing.Point(0, 59);
-            this.tctMain.Name = "tctMain";
-            this.tctMain.SelectedIndex = 0;
-            this.tctMain.Size = new System.Drawing.Size(1164, 473);
-            this.tctMain.TabIndex = 1;
-            // 
-            // tpUsers
-            // 
-            this.tpUsers.Location = new System.Drawing.Point(4, 29);
-            this.tpUsers.Name = "tpUsers";
-            this.tpUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUsers.Size = new System.Drawing.Size(1156, 440);
-            this.tpUsers.TabIndex = 0;
-            this.tpUsers.Text = "User Form";
-            this.tpUsers.UseVisualStyleBackColor = true;
-            // 
-            // tpComputer
-            // 
-            this.tpComputer.Location = new System.Drawing.Point(4, 29);
-            this.tpComputer.Name = "tpComputer";
-            this.tpComputer.Padding = new System.Windows.Forms.Padding(3);
-            this.tpComputer.Size = new System.Drawing.Size(1156, 440);
-            this.tpComputer.TabIndex = 1;
-            this.tpComputer.Text = "Food Form";
-            this.tpComputer.UseVisualStyleBackColor = true;
-            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1041);
-            this.Controls.Add(this.tctMain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Admin";
@@ -122,7 +86,6 @@
             this.Text = "Admin";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tctMain.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,8 +97,5 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFoods;
         private System.Windows.Forms.ToolStripMenuItem tsmiComputers;
         private System.Windows.Forms.ToolStripMenuItem tmsiUsers;
-        private System.Windows.Forms.TabControl tctMain;
-        private System.Windows.Forms.TabPage tpUsers;
-        private System.Windows.Forms.TabPage tpComputer;
     }
 }

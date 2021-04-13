@@ -197,3 +197,54 @@ CREATE PROC [deleteComputer]
 AS
 DELETE [computer] WHERE entity_id = @entity_id
 GO
+CREATE PROC [getAllRoles]
+AS
+SELECT	[role].entity_id AS 'role_id',
+		[role].name AS 'role_name'
+FROM [role]
+GO
+CREATE PROC [getUserFromRole]
+@roleId INT
+AS
+SELECT	[role].entity_id AS 'role_id',
+		[role].name AS 'role_name'
+FROM [role]
+WHERE [role].entity_id = @roleId
+GO
+CREATE PROC [addUser]
+@account VARCHAR(255), @password VARCHAR(255), @firstName NVARCHAR(255), @lastName NVARCHAR(255), @roleId INT
+AS
+INSERT INTO [user](account,password,firstName,lastName,role_id) VALUES (@account,@password,@firstName,@password,@roleId)
+GO
+CREATE PROC [updateUser]
+@userId INT, @account VARCHAR(255), @password VARCHAR(255), @firstName NVARCHAR(255), @lastName NVARCHAR(255), @roleId INT
+AS
+UPDATE [user] 
+SET	account = @account,
+	password = @password,
+	firstName = @lastName,
+	lastName = @lastName,
+	role_id = @roleId
+WHERE entity_id = @userId
+GO
+CREATE PROC [deleteUser]
+@userId INT
+AS 
+DELETE [user] WHERE entity_id = @userId
+GO
+CREATE PROC [getAllUsersFromRole]
+@role_id INT 
+AS
+SELECT	[user].entity_id,
+		[user].account,
+		[user].password,
+		[user].firstName,
+		[user].lastName,
+		CASE WHEN [role].entity_id = 1 THEN 'Admin'
+			 WHEN [role].entity_id = 2 THEN 'Vendor'
+		END AS 'Role'
+FROM [user]
+JOIN [role] 
+ON [user].role_id = [role].entity_id
+WHERE [role].entity_id = @role_id
+GO

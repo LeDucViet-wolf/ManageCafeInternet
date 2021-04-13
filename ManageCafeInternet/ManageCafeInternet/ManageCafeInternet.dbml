@@ -75,13 +75,13 @@
     <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.updateFood" Method="updateFood">
-    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="price" Type="System.Double" DbType="Float" />
-    <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
-    <Parameter Name="image" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.updateUser" Method="updateUser">
+    <Parameter Name="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="account" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="roleId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.addFood" Method="addFood">
@@ -92,8 +92,24 @@
     <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.addUser" Method="addUser">
+    <Parameter Name="account" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="firstName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="lastName" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="roleId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteComputer" Method="deleteComputer">
+    <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.deleteFood" Method="deleteFood">
     <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteUser" Method="deleteUser">
+    <Parameter Name="userId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.getAllAreas" Method="getAllAreas">
@@ -138,6 +154,23 @@
       <Column Name="food_type_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getAllRoles" Method="getAllRoles">
+    <ElementType Name="getAllRolesResult">
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="role_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getAllUsersFromRole" Method="getAllUsersFromRole">
+    <Parameter Name="role_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getAllUsersFromRoleResult">
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="account" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Role" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getUser" Method="getUser">
     <Parameter Name="account" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(255)" />
@@ -150,14 +183,26 @@
       <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getUserFromRole" Method="getUserFromRole">
+    <Parameter Name="roleId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getUserFromRoleResult">
+      <Column Name="role_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="role_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.updateComputer" Method="updateComputer">
     <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="computer_name" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.deleteComputer" Method="deleteComputer">
+  <Function Name="dbo.updateFood" Method="updateFood">
     <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="image" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

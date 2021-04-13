@@ -34,10 +34,7 @@ namespace ManageCafeInternet
 
         private void cbxArea_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            int selectedAreaId = cbxArea.SelectedIndex;
-            dgvComputers.DataSource = mci.getAllComputersFromArea(selectedAreaId + 1);
-            loadComputerDetail();
+            loadData();
         }
 
         private void loadComputerDetail()
@@ -79,7 +76,6 @@ namespace ManageCafeInternet
             {
                 MessageBox.Show("Something went wrong when add computer");
             }
-
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

@@ -34,3 +34,4 @@ C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInte
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.exe
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.pdb
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Login.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.UserForm.resources
