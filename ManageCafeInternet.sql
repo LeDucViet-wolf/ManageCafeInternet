@@ -222,7 +222,7 @@ AS
 UPDATE [user] 
 SET	account = @account,
 	password = @password,
-	firstName = @lastName,
+	firstName = @firstName,
 	lastName = @lastName,
 	role_id = @roleId
 WHERE entity_id = @userId
