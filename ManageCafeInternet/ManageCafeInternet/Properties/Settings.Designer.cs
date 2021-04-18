@@ -32,5 +32,16 @@ namespace ManageCafeInternet.Properties {
                 return ((string)(this["ManageCafeInternetConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security I" +
+            "nfo=True;User ID=sa;Password=1234$")]
+        public string ManageCafeInternetConnectionString1 {
+            get {
+                return ((string)(this["ManageCafeInternetConnectionString1"]));
+            }
+        }
     }
 }

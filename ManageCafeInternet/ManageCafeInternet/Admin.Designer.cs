@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.pnAdmin = new System.Windows.Forms.Panel();
             this.tsmiFoods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiComputers = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmlLogOut = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,12 +42,20 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFoods,
             this.tsmiComputers,
-            this.tmsiUsers});
+            this.tmsiUsers,
+            this.tsmlLogOut});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1924, 56);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // pnAdmin
+            // 
+            this.pnAdmin.Location = new System.Drawing.Point(12, 59);
+            this.pnAdmin.Name = "pnAdmin";
+            this.pnAdmin.Size = new System.Drawing.Size(1900, 970);
+            this.pnAdmin.TabIndex = 1;
             // 
             // tsmiFoods
             // 
@@ -74,11 +84,21 @@
             this.tmsiUsers.Text = "Manage Users";
             this.tmsiUsers.Click += new System.EventHandler(this.tmsiUsers_Click);
             // 
+            // tsmlLogOut
+            // 
+            this.tsmlLogOut.Image = global::ManageCafeInternet.Properties.Resources.loggin_button1;
+            this.tsmlLogOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmlLogOut.Name = "tsmlLogOut";
+            this.tsmlLogOut.Size = new System.Drawing.Size(94, 52);
+            this.tsmlLogOut.Text = "Log Out";
+            this.tsmlLogOut.Click += new System.EventHandler(this.tsmlLogOut_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1041);
+            this.Controls.Add(this.pnAdmin);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Admin";
@@ -97,5 +117,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFoods;
         private System.Windows.Forms.ToolStripMenuItem tsmiComputers;
         private System.Windows.Forms.ToolStripMenuItem tmsiUsers;
+        private System.Windows.Forms.Panel pnAdmin;
+        private System.Windows.Forms.ToolStripMenuItem tsmlLogOut;
     }
 }

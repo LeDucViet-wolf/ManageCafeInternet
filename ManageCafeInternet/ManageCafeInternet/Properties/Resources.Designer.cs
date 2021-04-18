@@ -123,6 +123,16 @@ namespace ManageCafeInternet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap loggin_button1 {
+            get {
+                object obj = ResourceManager.GetObject("loggin_button1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loggin_password {
             get {
                 object obj = ResourceManager.GetObject("loggin_password", resourceCulture);

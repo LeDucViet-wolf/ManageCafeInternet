@@ -13,7 +13,6 @@ C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInter
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\ManageCafeInternet.pdb
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csprojAssemblyReference.cache
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Admin.resources
-C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Form2.resources
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Properties.Resources.resources
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.GenerateResource.cache
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CoreCompileInputs.cache
@@ -35,3 +34,10 @@ C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInte
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.pdb
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Login.resources
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.UserForm.resources
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Login.resources
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.UserForm.resources
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Vendor.resources
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.AddFoodForm.resources
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.xml
+C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CopyComplete

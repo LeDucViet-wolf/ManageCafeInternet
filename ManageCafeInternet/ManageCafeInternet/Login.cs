@@ -32,6 +32,8 @@ namespace ManageCafeInternet
                 else
                 {
                     MessageBox.Show("Hello Vendor " + a.firstName.ToString() + " " + a.lastName.ToString());
+                    Vendor vendor = new Vendor();
+                    vendor.Show();
                 }
             }
             else

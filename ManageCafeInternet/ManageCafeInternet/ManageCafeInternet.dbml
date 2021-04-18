@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManageCafeInternet" Class="ManageCafeInternetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=ManageCafeInternet;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security Info=True;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.area" Member="areas">
     <Type Name="area">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -11,7 +11,7 @@
   <Table Name="dbo.[user]" Member="users">
     <Type Name="user">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="account" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="account" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="firstName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="lastName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
@@ -22,7 +22,8 @@
   <Table Name="dbo.computer" Member="computers">
     <Type Name="computer">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="area_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="area_computer" Member="area" ThisKey="area_id" OtherKey="entity_id" Type="area" IsForeignKey="true" />
     </Type>
@@ -31,7 +32,6 @@
     <Type Name="computer_status">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="computer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="food_id" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -44,7 +44,7 @@
       <Column Name="name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="image" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="food_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="food_type_food" Member="food_type" ThisKey="food_type_id" OtherKey="entity_id" Type="food_type" IsForeignKey="true" />
     </Type>
@@ -90,6 +90,11 @@
     <Parameter Name="quantity" Type="System.Int32" DbType="Int" />
     <Parameter Name="image" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addSelectedFoods" Method="addSelectedFoods">
+    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="foodIdJson" Type="System.String" DbType="VarChar(255)" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.addUser" Method="addUser">
@@ -196,6 +201,15 @@
     <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.updateComputerStartTime" Method="updateComputerStartTime">
+    <Parameter Name="computer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="start_time" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateComputerStatus" Method="updateComputerStatus">
+    <Parameter Name="computer_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.updateFood" Method="updateFood">
     <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
@@ -204,5 +218,17 @@
     <Parameter Name="image" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="foodTypeId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateFoodQuantity" Method="updateFoodQuantity">
+    <Parameter Name="foodId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="quanity" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getSelectedFoodsByComputerId" Method="getSelectedFoodsByComputerId">
+    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getSelectedFoodsByComputerIdResult">
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="food_id" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

@@ -55,8 +55,8 @@ CREATE TABLE [computer_status]
 (
 	entity_id INT PRIMARY KEY IDENTITY,
 	computer_id INT NOT NULL,
-	start_time DATETIME NOT NULL,
-	end_time DATETIME NOT NULL,
+	start_time DATETIME,
+	end_time DATETIME,
 	food_id NVARCHAR(255)
 )
 GO
@@ -247,4 +247,37 @@ FROM [user]
 JOIN [role] 
 ON [user].role_id = [role].entity_id
 WHERE [role].entity_id = @role_id
+GO
+CREATE PROC [updateComputerStatus]
+@computer_id INT
+AS
+UPDATE [computer] SET status = 1
+WHERE entity_id = @computer_id
+GO
+CREATE PROC [updateComputerStartTime]
+@computer_id INT, @start_time DATETIME
+AS
+INSERT INTO [computer_status](computer_id, start_time) VALUES (@computer_id, @start_time)
+GO
+CREATE PROC [addSelectedFoods]
+@computerId INT, @foodIdJson VARCHAR(255)
+AS
+UPDATE [computer_status]
+SET food_id = @foodIdJson
+WHERE computer_id = @computerId
+GO
+CREATE PROC [updateFoodQuantity]
+@foodId INT, @quanity INT
+AS
+UPDATE [food]
+SET quantity = @quanity
+WHERE entity_id = @foodId
+GO
+CREATE PROC [getSelectedFoodsByComputerId]
+@computerId INT
+AS
+SELECT [computer_status].entity_id,
+		[computer_status].food_id
+FROM [computer_status]
+WHERE computer_id = @computerId
 GO
