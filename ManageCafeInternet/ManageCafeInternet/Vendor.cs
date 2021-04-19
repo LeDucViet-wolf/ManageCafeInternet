@@ -52,11 +52,36 @@ namespace ManageCafeInternet
                 if (dgvComputers.CurrentRow != null)
                 {
                     DataGridViewRow row = dgvComputers.CurrentRow;
+                    cmsOptions.Show(); 
                 }
             }
         }
 
         private void btnTurnOnComputer_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void loadComputerDetail()
+        {
+            if (dgvComputers.CurrentRow != null)
+            {
+                DataGridViewRow row = dgvComputers.CurrentRow;
+                txtComputerId.Text = row.Cells[0].Value.ToString();
+            }
+        }
+
+        private void dgvComputers_Click(object sender, EventArgs e)
+        {
+            loadComputerDetail();
+        }
+
+        private void btnAddFoods_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void tsmiTurnOn_Click(object sender, EventArgs e)
         {
             if (dgvComputers.CurrentRow != null)
             {
@@ -85,28 +110,14 @@ namespace ManageCafeInternet
             }
         }
 
-        private void loadComputerDetail()
-        {
-            if (dgvComputers.CurrentRow != null)
-            {
-                DataGridViewRow row = dgvComputers.CurrentRow;
-                txtComputerId.Text = row.Cells[0].Value.ToString();
-            }
-        }
-
-        private void dgvComputers_Click(object sender, EventArgs e)
-        {
-            loadComputerDetail();
-        }
-
-        private void btnAddFoods_Click(object sender, EventArgs e)
+        private void tsmiAddFoods_Click(object sender, EventArgs e)
         {
             if (dgvComputers.CurrentRow != null)
             {
                 DataGridViewRow row = dgvComputers.CurrentRow;
                 if (row.Cells[4].Value.ToString() == "Using")
                 {
-                    AddFoodForm aff = new AddFoodForm();
+                    AddFoodForm aff = new AddFoodForm(Convert.ToInt32(txtComputerId.Text));
                     aff.Show();
                     aff.txtComputerId.Text = this.txtComputerId.Text;
                 }
@@ -116,5 +127,6 @@ namespace ManageCafeInternet
                 }
             }
         }
+        
     }
 }

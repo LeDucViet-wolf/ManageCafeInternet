@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvComputers = new System.Windows.Forms.DataGridView();
             this.cbxArea = new System.Windows.Forms.ComboBox();
-            this.btnTurnOnComputer = new System.Windows.Forms.Button();
             this.txtComputerId = new System.Windows.Forms.TextBox();
-            this.btnAddFoods = new System.Windows.Forms.Button();
+            this.cmsOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiTurnOn = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAddFoods = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComputers)).BeginInit();
+            this.cmsOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvComputers
@@ -57,16 +60,6 @@
             this.cbxArea.TabIndex = 1;
             this.cbxArea.SelectedIndexChanged += new System.EventHandler(this.cbxArea_SelectedIndexChanged);
             // 
-            // btnTurnOnComputer
-            // 
-            this.btnTurnOnComputer.Location = new System.Drawing.Point(1482, 114);
-            this.btnTurnOnComputer.Name = "btnTurnOnComputer";
-            this.btnTurnOnComputer.Size = new System.Drawing.Size(75, 23);
-            this.btnTurnOnComputer.TabIndex = 2;
-            this.btnTurnOnComputer.Text = "Turn on";
-            this.btnTurnOnComputer.UseVisualStyleBackColor = true;
-            this.btnTurnOnComputer.Click += new System.EventHandler(this.btnTurnOnComputer_Click);
-            // 
             // txtComputerId
             // 
             this.txtComputerId.Location = new System.Drawing.Point(1493, 53);
@@ -75,30 +68,41 @@
             this.txtComputerId.Size = new System.Drawing.Size(100, 20);
             this.txtComputerId.TabIndex = 3;
             // 
-            // btnAddFoods
+            // cmsOptions
             // 
-            this.btnAddFoods.Location = new System.Drawing.Point(1563, 114);
-            this.btnAddFoods.Name = "btnAddFoods";
-            this.btnAddFoods.Size = new System.Drawing.Size(75, 23);
-            this.btnAddFoods.TabIndex = 4;
-            this.btnAddFoods.Text = "Add foods";
-            this.btnAddFoods.UseVisualStyleBackColor = true;
-            this.btnAddFoods.Click += new System.EventHandler(this.btnAddFoods_Click);
+            this.cmsOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTurnOn,
+            this.tsmiAddFoods});
+            this.cmsOptions.Name = "cmsOptions";
+            this.cmsOptions.Size = new System.Drawing.Size(132, 48);
+            // 
+            // tsmiTurnOn
+            // 
+            this.tsmiTurnOn.Name = "tsmiTurnOn";
+            this.tsmiTurnOn.Size = new System.Drawing.Size(131, 22);
+            this.tsmiTurnOn.Text = "Turn On";
+            this.tsmiTurnOn.Click += new System.EventHandler(this.tsmiTurnOn_Click);
+            // 
+            // tsmiAddFoods
+            // 
+            this.tsmiAddFoods.Name = "tsmiAddFoods";
+            this.tsmiAddFoods.Size = new System.Drawing.Size(131, 22);
+            this.tsmiAddFoods.Text = "Add Foods";
+            this.tsmiAddFoods.Click += new System.EventHandler(this.tsmiAddFoods_Click);
             // 
             // Vendor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1041);
-            this.Controls.Add(this.btnAddFoods);
             this.Controls.Add(this.txtComputerId);
-            this.Controls.Add(this.btnTurnOnComputer);
             this.Controls.Add(this.cbxArea);
             this.Controls.Add(this.dgvComputers);
             this.Name = "Vendor";
             this.Text = "Vendor";
             this.Load += new System.EventHandler(this.Vendor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvComputers)).EndInit();
+            this.cmsOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,8 +112,9 @@
 
         private System.Windows.Forms.DataGridView dgvComputers;
         private System.Windows.Forms.ComboBox cbxArea;
-        private System.Windows.Forms.Button btnTurnOnComputer;
-        private System.Windows.Forms.TextBox txtComputerId;
-        private System.Windows.Forms.Button btnAddFoods;
+        public System.Windows.Forms.TextBox txtComputerId;
+        private System.Windows.Forms.ContextMenuStrip cmsOptions;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTurnOn;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAddFoods;
     }
 }

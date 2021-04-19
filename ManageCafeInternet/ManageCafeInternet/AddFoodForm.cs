@@ -13,8 +13,15 @@ namespace ManageCafeInternet
 {
     public partial class AddFoodForm : Form
     {
+        public int computerId;
         public AddFoodForm()
         {
+            InitializeComponent();
+        }
+
+        public AddFoodForm(int computerId)
+        {
+            this.computerId = computerId;
             InitializeComponent();
         }
 
@@ -35,6 +42,7 @@ namespace ManageCafeInternet
             hcb.MouseClick += new MouseEventHandler(HeaderCheckBox_MouseClick);
             DisplayFoods();
             loadFoodDetails();
+            loadSelectedFoods();
         }
 
         CheckBox hcb = null;
@@ -67,12 +75,12 @@ namespace ManageCafeInternet
             ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
             try
             {
-                List<string> foodIds = new List<string>();
+                List<object> foodIds = new List<object>();
                 for (int i = 0; i < dgvFoods.RowCount; i++)
                 {
                     if (Convert.ToBoolean(dgvFoods.Rows[i].Cells["chk"].Value) == true)
                     {
-                        foodIds.Add(dgvFoods.Rows[i].Cells[2].Value.ToString() + "+" + dgvFoods.Rows[i].Cells[1].Value.ToString());
+                        foodIds.Add(new { foodId = dgvFoods.Rows[i].Cells[2].Value, qty = Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value) });
                         mci.updateFoodQuantity(Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value.ToString()), Convert.ToInt32(dgvFoods.Rows[i].Cells[5].Value.ToString()) - Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value.ToString()));
                     }
 
@@ -81,6 +89,7 @@ namespace ManageCafeInternet
                 mci.addSelectedFoods(Convert.ToInt32(txtComputerId.Text), foodIdsJson);
                 MessageBox.Show("Add selected foods to computer with id = " + txtComputerId.Text + " success");
                 DisplayFoods();
+                loadSelectedFoods();
             }
             catch (Exception)
             {
@@ -99,14 +108,11 @@ namespace ManageCafeInternet
         private void loadSelectedFoods()
         {
             ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            int computerId = Convert.ToInt32(txtComputerId.Text);
-            var a = mci.getSelectedFoodsByComputerId(computerId).FirstOrDefault();
-            if (a != null) 
+            var a = mci.getSelectedFoodsByComputerId(this.computerId).FirstOrDefault();
+            if (a.food_id != null) 
             {
-
-            } else
-            {
-                dgvSelectedFoods.Hide();
+                var b = JsonConvert.DeserializeObject(a.food_id);
+                Console.WriteLine(123);
             }
         }
         

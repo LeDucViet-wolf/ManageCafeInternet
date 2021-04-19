@@ -41,3 +41,8 @@ C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInter
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.dll
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.xml
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CopyComplete
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.AddFoodForm.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Vendor.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CopyComplete

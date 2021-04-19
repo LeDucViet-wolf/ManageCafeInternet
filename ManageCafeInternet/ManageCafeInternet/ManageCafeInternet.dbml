@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManageCafeInternet" Class="ManageCafeInternetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security Info=True;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAB3_PC07;Initial Catalog=ManageCafeInternet;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.area" Member="areas">
     <Type Name="area">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -32,8 +32,8 @@
     <Type Name="computer_status">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="computer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="start_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="end_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="start_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="food_id" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="computer_status_order" Member="orders" ThisKey="entity_id" OtherKey="computer_status_id" Type="order" />
     </Type>
@@ -176,6 +176,13 @@
       <Column Name="Role" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getSelectedFoodsByComputerId" Method="getSelectedFoodsByComputerId">
+    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getSelectedFoodsByComputerIdResult">
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="food_id" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getUser" Method="getUser">
     <Parameter Name="account" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(255)" />
@@ -223,12 +230,5 @@
     <Parameter Name="foodId" Type="System.Int32" DbType="Int" />
     <Parameter Name="quanity" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getSelectedFoodsByComputerId" Method="getSelectedFoodsByComputerId">
-    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getSelectedFoodsByComputerIdResult">
-      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="food_id" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-    </ElementType>
   </Function>
 </Database>

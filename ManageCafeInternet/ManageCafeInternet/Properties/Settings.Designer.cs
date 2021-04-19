@@ -43,5 +43,16 @@ namespace ManageCafeInternet.Properties {
                 return ((string)(this["ManageCafeInternetConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAB3_PC07;Initial Catalog=ManageCafeInternet;User ID=sa;Password=1234" +
+            "$")]
+        public string ManageCafeInternetConnectionString2 {
+            get {
+                return ((string)(this["ManageCafeInternetConnectionString2"]));
+            }
+        }
     }
 }
