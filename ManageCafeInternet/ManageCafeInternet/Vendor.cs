@@ -117,9 +117,12 @@ namespace ManageCafeInternet
                 DataGridViewRow row = dgvComputers.CurrentRow;
                 if (row.Cells[4].Value.ToString() == "Using")
                 {
+                    ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                    var a = mci.getComputerStatusId(Convert.ToInt32(this.txtComputerId.Text)).FirstOrDefault();
                     AddFoodForm aff = new AddFoodForm(Convert.ToInt32(txtComputerId.Text));
-                    aff.Show();
                     aff.txtComputerId.Text = this.txtComputerId.Text;
+                    aff.txtComputerStatusId.Text = Convert.ToString(a.entity_id);
+                    aff.Show();
                 }
                 else
                 {

@@ -57,7 +57,7 @@ namespace ManageCafeInternet
     #endregion
 		
 		public ManageCafeInternetDataContext() : 
-				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString2, mappingSource)
+				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -134,6 +134,14 @@ namespace ManageCafeInternet
 			}
 		}
 		
+		public System.Data.Linq.Table<foods_ordered> foods_ordereds
+		{
+			get
+			{
+				return this.GetTable<foods_ordered>();
+			}
+		}
+		
 		public System.Data.Linq.Table<order> orders
 		{
 			get
@@ -172,9 +180,9 @@ namespace ManageCafeInternet
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addSelectedFoods")]
-		public int addSelectedFoods([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string foodIdJson)
+		public int addSelectedFoods([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> foodId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qty, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerStatusId)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerId, foodIdJson);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), foodId, qty, computerId, computerStatusId);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -255,10 +263,17 @@ namespace ManageCafeInternet
 			return ((ISingleResult<getAllUsersFromRoleResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getSelectedFoodsByComputerId")]
-		public ISingleResult<getSelectedFoodsByComputerIdResult> getSelectedFoodsByComputerId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComputerStatusId")]
+		public ISingleResult<getComputerStatusIdResult> getComputerStatusId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerId);
+			return ((ISingleResult<getComputerStatusIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getSelectedFoodsByComputerId")]
+		public ISingleResult<getSelectedFoodsByComputerIdResult> getSelectedFoodsByComputerId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerStatusId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerId, computerStatusId);
 			return ((ISingleResult<getSelectedFoodsByComputerIdResult>)(result.ReturnValue));
 		}
 		
@@ -308,6 +323,13 @@ namespace ManageCafeInternet
 		public int updateFoodQuantity([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> foodId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> quanity)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), foodId, quanity);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateSelectedFoods")]
+		public int updateSelectedFoods([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> foodId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> qty)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), foodId, qty);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -862,8 +884,6 @@ namespace ManageCafeInternet
 		
 		private System.Nullable<System.DateTime> _end_time;
 		
-		private string _food_id;
-		
 		private EntitySet<order> _orders;
 		
     #region Extensibility Method Definitions
@@ -878,8 +898,6 @@ namespace ManageCafeInternet
     partial void Onstart_timeChanged();
     partial void Onend_timeChanging(System.Nullable<System.DateTime> value);
     partial void Onend_timeChanged();
-    partial void Onfood_idChanging(string value);
-    partial void Onfood_idChanged();
     #endregion
 		
 		public computer_status()
@@ -964,26 +982,6 @@ namespace ManageCafeInternet
 					this._end_time = value;
 					this.SendPropertyChanged("end_time");
 					this.Onend_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_food_id", DbType="NVarChar(255)")]
-		public string food_id
-		{
-			get
-			{
-				return this._food_id;
-			}
-			set
-			{
-				if ((this._food_id != value))
-				{
-					this.Onfood_idChanging(value);
-					this.SendPropertyChanging();
-					this._food_id = value;
-					this.SendPropertyChanged("food_id");
-					this.Onfood_idChanged();
 				}
 			}
 		}
@@ -1368,6 +1366,87 @@ namespace ManageCafeInternet
 		{
 			this.SendPropertyChanging();
 			entity.food_type = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.foods_ordered")]
+	public partial class foods_ordered
+	{
+		
+		private int _computer_id;
+		
+		private int _food_id;
+		
+		private int _qty;
+		
+		private int _computer_status_id;
+		
+		public foods_ordered()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_computer_id", DbType="Int NOT NULL")]
+		public int computer_id
+		{
+			get
+			{
+				return this._computer_id;
+			}
+			set
+			{
+				if ((this._computer_id != value))
+				{
+					this._computer_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_food_id", DbType="Int NOT NULL")]
+		public int food_id
+		{
+			get
+			{
+				return this._food_id;
+			}
+			set
+			{
+				if ((this._food_id != value))
+				{
+					this._food_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_qty", DbType="Int NOT NULL")]
+		public int qty
+		{
+			get
+			{
+				return this._qty;
+			}
+			set
+			{
+				if ((this._qty != value))
+				{
+					this._qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_computer_status_id", DbType="Int NOT NULL")]
+		public int computer_status_id
+		{
+			get
+			{
+				return this._computer_status_id;
+			}
+			set
+			{
+				if ((this._computer_status_id != value))
+				{
+					this._computer_status_id = value;
+				}
+			}
 		}
 	}
 	
@@ -2190,14 +2269,12 @@ namespace ManageCafeInternet
 		}
 	}
 	
-	public partial class getSelectedFoodsByComputerIdResult
+	public partial class getComputerStatusIdResult
 	{
 		
 		private int _entity_id;
 		
-		private string _food_id;
-		
-		public getSelectedFoodsByComputerIdResult()
+		public getComputerStatusIdResult()
 		{
 		}
 		
@@ -2216,9 +2293,25 @@ namespace ManageCafeInternet
 				}
 			}
 		}
+	}
+	
+	public partial class getSelectedFoodsByComputerIdResult
+	{
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_food_id", DbType="NVarChar(255)")]
-		public string food_id
+		private int _food_id;
+		
+		private string _name;
+		
+		private int _qty;
+		
+		private double _price;
+		
+		public getSelectedFoodsByComputerIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_food_id", DbType="Int NOT NULL")]
+		public int food_id
 		{
 			get
 			{
@@ -2229,6 +2322,54 @@ namespace ManageCafeInternet
 				if ((this._food_id != value))
 				{
 					this._food_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_qty", DbType="Int NOT NULL")]
+		public int qty
+		{
+			get
+			{
+				return this._qty;
+			}
+			set
+			{
+				if ((this._qty != value))
+				{
+					this._qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price", DbType="Float NOT NULL")]
+		public double price
+		{
+			get
+			{
+				return this._price;
+			}
+			set
+			{
+				if ((this._price != value))
+				{
+					this._price = value;
 				}
 			}
 		}

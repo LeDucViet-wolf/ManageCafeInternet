@@ -56,8 +56,7 @@ CREATE TABLE [computer_status]
 	entity_id INT PRIMARY KEY IDENTITY,
 	computer_id INT NOT NULL,
 	start_time DATETIME,
-	end_time DATETIME,
-	food_id NVARCHAR(255)
+	end_time DATETIME
 )
 GO
 CREATE TABLE [order]
@@ -67,6 +66,15 @@ CREATE TABLE [order]
 	FOREIGN KEY (computer_status_id) REFERENCES [computer_status](entity_id)
 )
 GO 
+CREATE TABLE [foods_ordered]
+(
+	computer_id INT NOT NULL,
+	food_id INT NOT NULL,
+	qty INT NOT NULL,
+	computer_status_id INT NOT NULL,
+	FOREIGN KEY (food_id) REFERENCES [food](entity_id)
+)
+GO
 INSERT INTO [role] VALUES
 	(N'admin'),
 	(N'vendor')
@@ -259,13 +267,6 @@ CREATE PROC [updateComputerStartTime]
 AS
 INSERT INTO [computer_status](computer_id, start_time) VALUES (@computer_id, @start_time)
 GO
-CREATE PROC [addSelectedFoods]
-@computerId INT, @foodIdJson VARCHAR(255)
-AS
-UPDATE [computer_status]
-SET food_id = @foodIdJson
-WHERE computer_id = @computerId
-GO
 CREATE PROC [updateFoodQuantity]
 @foodId INT, @quanity INT
 AS
@@ -273,11 +274,34 @@ UPDATE [food]
 SET quantity = @quanity
 WHERE entity_id = @foodId
 GO
-CREATE PROC [getSelectedFoodsByComputerId]
+CREATE PROC [addSelectedFoods]
+@foodId INT, @qty INT, @computerId INT, @computerStatusId INT
+AS
+INSERT INTO [foods_ordered] (food_id,qty,computer_id,computer_status_id) VALUES (@foodId, @qty, @computerId, @computerStatusId)
+GO
+CREATE PROC [getComputerStatusId]
 @computerId INT
 AS
-SELECT [computer_status].entity_id,
-		[computer_status].food_id
+SELECT [computer_status].entity_id
 FROM [computer_status]
-WHERE computer_id = @computerId
+WHERE [computer_status].computer_id = @computerId
+AND [computer_status].end_time IS NULL
+GO
+CREATE PROC [getSelectedFoodsByComputerId]
+@computerId INT, @computerStatusId INT
+AS
+SELECT	[foods_ordered].food_id,
+		[food].name,
+		[foods_ordered].qty,
+		[food].price
+FROM [foods_ordered]
+JOIN [food]
+ON [foods_ordered].food_id = [food].entity_id
+GO
+CREATE PROC [updateSelectedFoods]
+@foodId INT, @qty INT
+AS
+UPDATE [foods_ordered] 
+SET qty = @qty
+WHERE food_id = @foodId
 GO

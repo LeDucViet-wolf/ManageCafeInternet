@@ -36,6 +36,7 @@
             this.txtComputerId = new System.Windows.Forms.TextBox();
             this.dgvSelectedFoods = new System.Windows.Forms.DataGridView();
             this.lblSelectedFoods = new System.Windows.Forms.Label();
+            this.txtComputerStatusId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedFoods)).BeginInit();
             this.SuspendLayout();
@@ -97,9 +98,12 @@
             // 
             // dgvSelectedFoods
             // 
+            this.dgvSelectedFoods.AllowUserToAddRows = false;
+            this.dgvSelectedFoods.AllowUserToDeleteRows = false;
             this.dgvSelectedFoods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSelectedFoods.Location = new System.Drawing.Point(12, 331);
             this.dgvSelectedFoods.Name = "dgvSelectedFoods";
+            this.dgvSelectedFoods.ReadOnly = true;
             this.dgvSelectedFoods.Size = new System.Drawing.Size(1145, 190);
             this.dgvSelectedFoods.TabIndex = 13;
             // 
@@ -113,11 +117,21 @@
             this.lblSelectedFoods.TabIndex = 14;
             this.lblSelectedFoods.Text = "Seleteced Foods";
             // 
+            // txtComputerStatusId
+            // 
+            this.txtComputerStatusId.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtComputerStatusId.Location = new System.Drawing.Point(225, 216);
+            this.txtComputerStatusId.Name = "txtComputerStatusId";
+            this.txtComputerStatusId.ReadOnly = true;
+            this.txtComputerStatusId.Size = new System.Drawing.Size(207, 31);
+            this.txtComputerStatusId.TabIndex = 15;
+            // 
             // AddFoodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 533);
+            this.Controls.Add(this.txtComputerStatusId);
             this.Controls.Add(this.lblSelectedFoods);
             this.Controls.Add(this.dgvSelectedFoods);
             this.Controls.Add(this.txtComputerId);
@@ -145,5 +159,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantityColumn;
         private System.Windows.Forms.DataGridView dgvSelectedFoods;
         private System.Windows.Forms.Label lblSelectedFoods;
+        public System.Windows.Forms.TextBox txtComputerStatusId;
     }
 }
