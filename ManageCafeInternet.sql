@@ -315,5 +315,6 @@ CREATE PROC [checkoutComputer]
 @endTime DATETIME, @computerId INT
 AS
 UPDATE [computer_status] 
-SET end_time = @endTime
-WHERE entity_id = (SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].end_time IS NULL AND [computer_status].computer_id = @computerId ORDER BY [computer_status].start_time DESC)
+SET [computer_status].end_time = @endTime
+WHERE [computer_status].entity_id = (SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].end_time IS NULL AND [computer_status].computer_id = @computerId ORDER BY [computer_status].start_time DESC)
+select*from computer_status
