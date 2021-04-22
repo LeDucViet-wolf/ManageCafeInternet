@@ -274,11 +274,6 @@ UPDATE [food]
 SET quantity = @quanity
 WHERE entity_id = @foodId
 GO
-CREATE PROC [addSelectedFoods]
-@foodId INT, @qty INT, @computerId INT, @computerStatusId INT
-AS
-INSERT INTO [foods_ordered] (food_id,qty,computer_id,computer_status_id) VALUES (@foodId, @qty, @computerId, @computerStatusId)
-GO
 CREATE PROC [getComputerStatusId]
 @computerId INT
 AS
@@ -297,11 +292,28 @@ SELECT	[foods_ordered].food_id,
 FROM [foods_ordered]
 JOIN [food]
 ON [foods_ordered].food_id = [food].entity_id
+WHERE [foods_ordered].computer_id = @computerId AND [foods_ordered].computer_status_id = @computerStatusId
 GO
-CREATE PROC [updateSelectedFoods]
-@foodId INT, @qty INT
+CREATE PROC [addSelectedFoods]
+@foodId INT, @qty INT, @computerId INT, @computerStatusId INT
 AS
-UPDATE [foods_ordered] 
-SET qty = @qty
-WHERE food_id = @foodId
+IF EXISTS (SELECT * FROM [foods_ordered] WHERE [foods_ordered].food_id = @foodId AND [foods_ordered].computer_status_id = @computerStatusId AND [foods_ordered].computer_id = @computerId)
+BEGIN
+	UPDATE [foods_ordered] SET qty += @qty WHERE food_id = @foodId
+END 
+ELSE 
+BEGIN
+	INSERT INTO [foods_ordered] (food_id,qty,computer_id,computer_status_id) VALUES (@foodId, @qty, @computerId, @computerStatusId)
+END
 GO
+CREATE PROC [getComputerToCheckout]
+@computerId INT
+AS
+SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].end_time IS NULL AND [computer_status].computer_id = @computerId ORDER BY [computer_status].start_time DESC
+GO
+CREATE PROC [checkoutComputer]
+@endTime DATETIME, @computerId INT
+AS
+UPDATE [computer_status] 
+SET end_time = @endTime
+WHERE entity_id = (SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].end_time IS NULL AND [computer_status].computer_id = @computerId ORDER BY [computer_status].start_time DESC)

@@ -130,6 +130,18 @@ namespace ManageCafeInternet
                 }
             }
         }
-        
+
+        private void tsmiCheckout_Click(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            MessageBox.Show(now.ToString());
+            int computerId = Convert.ToInt32(txtComputerId.Text);
+            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+            var a = mci.getComputerToCheckout(computerId);
+            if (a != null)
+            {
+                mci.checkoutComputer(now, computerId);
+            }
+        }
     }
 }

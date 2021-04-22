@@ -35,6 +35,7 @@
             this.cmsOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiTurnOn = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAddFoods = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCheckout = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComputers)).BeginInit();
             this.cmsOptions.SuspendLayout();
             this.SuspendLayout();
@@ -72,23 +73,31 @@
             // 
             this.cmsOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTurnOn,
-            this.tsmiAddFoods});
+            this.tsmiAddFoods,
+            this.tsmiCheckout});
             this.cmsOptions.Name = "cmsOptions";
-            this.cmsOptions.Size = new System.Drawing.Size(132, 48);
+            this.cmsOptions.Size = new System.Drawing.Size(181, 92);
             // 
             // tsmiTurnOn
             // 
             this.tsmiTurnOn.Name = "tsmiTurnOn";
-            this.tsmiTurnOn.Size = new System.Drawing.Size(131, 22);
+            this.tsmiTurnOn.Size = new System.Drawing.Size(180, 22);
             this.tsmiTurnOn.Text = "Turn On";
             this.tsmiTurnOn.Click += new System.EventHandler(this.tsmiTurnOn_Click);
             // 
             // tsmiAddFoods
             // 
             this.tsmiAddFoods.Name = "tsmiAddFoods";
-            this.tsmiAddFoods.Size = new System.Drawing.Size(131, 22);
+            this.tsmiAddFoods.Size = new System.Drawing.Size(180, 22);
             this.tsmiAddFoods.Text = "Add Foods";
             this.tsmiAddFoods.Click += new System.EventHandler(this.tsmiAddFoods_Click);
+            // 
+            // tsmiCheckout
+            // 
+            this.tsmiCheckout.Name = "tsmiCheckout";
+            this.tsmiCheckout.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCheckout.Text = "Checkout";
+            this.tsmiCheckout.Click += new System.EventHandler(this.tsmiCheckout_Click);
             // 
             // Vendor
             // 
@@ -116,5 +125,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsOptions;
         private System.Windows.Forms.ToolStripMenuItem tsmiTurnOn;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddFoods;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCheckout;
     }
 }

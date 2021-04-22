@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManageCafeInternet" Class="ManageCafeInternetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security Info=True;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAB2_PC08;Initial Catalog=ManageCafeInternet;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.area" Member="areas">
     <Type Name="area">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -193,6 +193,15 @@
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getComputerToCheckout" Method="getComputerToCheckout">
+    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getComputerToCheckoutResult">
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="computer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="start_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="end_time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getSelectedFoodsByComputerId" Method="getSelectedFoodsByComputerId">
     <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
     <Parameter Name="computerStatusId" Type="System.Int32" DbType="Int" />
@@ -251,9 +260,9 @@
     <Parameter Name="quanity" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.updateSelectedFoods" Method="updateSelectedFoods">
-    <Parameter Name="foodId" Type="System.Int32" DbType="Int" />
-    <Parameter Name="qty" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.checkoutComputer" Method="checkoutComputer">
+    <Parameter Name="endTime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

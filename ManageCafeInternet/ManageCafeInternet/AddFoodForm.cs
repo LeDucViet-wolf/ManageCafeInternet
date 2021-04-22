@@ -75,26 +75,31 @@ namespace ManageCafeInternet
         private void btnAddFoods_Click(object sender, EventArgs e)
         {
             ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            var a = mci.getSelectedFoodsByComputerId(Convert.ToInt32(txtComputerId.Text), Convert.ToInt32(txtComputerStatusId.Text));
+            int computerId = Convert.ToInt32(txtComputerId.Text);
+            int computerStatusId = Convert.ToInt32(txtComputerStatusId.Text);
             try
             {
                 for (int i = 0; i < dgvFoods.RowCount; i++)
                 {
                     if (Convert.ToBoolean(dgvFoods.Rows[i].Cells["chk"].Value) == true)
                     {
-                        mci.updateFoodQuantity(Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value.ToString()), Convert.ToInt32(dgvFoods.Rows[i].Cells[5].Value.ToString()) - Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value.ToString()));
-                        if (a.Any((x => x.food_id == Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value.ToString()))))
+                        string foodName = dgvFoods.Rows[i].Cells[3].Value.ToString();
+                        int foodId = Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value);
+                        int qtyOrder = Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value.ToString());
+                        int qtyAvailable = Convert.ToInt32(dgvFoods.Rows[i].Cells[5].Value.ToString());
+                        if (qtyOrder <= qtyAvailable)
                         {
-                            mci.updateSelectedFoods(Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value), Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value.ToString()));
+                            mci.updateFoodQuantity(foodId, qtyAvailable - qtyOrder);
+                            mci.addSelectedFoods(foodId, qtyOrder, computerId, computerStatusId);
+                            MessageBox.Show("Add selected foods to computer with id = " + txtComputerId.Text + " success");
                         }
                         else
                         {
-                            mci.addSelectedFoods(Convert.ToInt32(dgvFoods.Rows[i].Cells[2].Value), Convert.ToInt32(dgvFoods.Rows[i].Cells[1].Value), Convert.ToInt32(txtComputerId.Text), Convert.ToInt32(txtComputerStatusId.Text));
+                            MessageBox.Show("Food order with name = \"" + foodName + "\" is bigger than food available");
                         }
                     }
 
                 }
-                MessageBox.Show("Add selected foods to computer with id = " + txtComputerId.Text + " success");
                 DisplayFoods();
                 loadSelectedFoods();
             }
@@ -118,5 +123,9 @@ namespace ManageCafeInternet
             dgvSelectedFoods.DataSource = mci.getSelectedFoodsByComputerId(Convert.ToInt32(txtComputerId.Text), Convert.ToInt32(txtComputerStatusId.Text));
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
