@@ -47,5 +47,33 @@ namespace ManageCafeInternet
         {
             this.Close();
         }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var a = mci.getUser(txtAccount.Text, txtPassword.Text).FirstOrDefault();
+                if (a != null)
+                {
+                    if (a.role_id == 1)
+                    {
+                        MessageBox.Show("Hello Admin " + a.firstName.ToString() + " " + a.lastName.ToString());
+                        Admin admin = new Admin();
+                        //this.Hide();
+                        admin.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hello Vendor " + a.firstName.ToString() + " " + a.lastName.ToString());
+                        Vendor vendor = new Vendor();
+                        vendor.Show();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Account or password is not valid");
+                }
+            }
+        }
     }
 }

@@ -17,27 +17,6 @@ namespace ManageCafeInternet
             InitializeComponent();
         }
 
-        private void btnUploadFoodImage_Click(object sender, EventArgs e)
-        {
-            String imageLocation = "";
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *.bmp;";
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    imageLocation = dialog.FileName;
-                    ptbFoodImage.Image = new Bitmap(dialog.FileName);
-
-                }
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("An Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void FoodForm_Load(object sender, EventArgs e)
         {
             loadData();
@@ -75,7 +54,7 @@ namespace ManageCafeInternet
             int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
             try
             {
-                mci.addFood(name, price, quantity, "", foodTypeId);
+                mci.addFood(name, price, quantity, foodTypeId);
                 MessageBox.Show("Add food success");
                 loadData();
             }
@@ -128,7 +107,7 @@ namespace ManageCafeInternet
                         double price = Convert.ToDouble(txtPrice.Text);
                         int quantity = Convert.ToInt32(txtQuantity.Text);
                         int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
-                        mci.updateFood(id, name, price, quantity, "", foodTypeId);
+                        mci.updateFood(id, name, price, quantity, foodTypeId);
                         MessageBox.Show("Update food with id = " + txtId.Text + " success");
                         loadData();
                     }
@@ -155,7 +134,7 @@ namespace ManageCafeInternet
                     if (f != null)
                     {
                         mci.deleteFood(Convert.ToInt32(txtId.Text));
-                        MessageBox.Show("Delete food with id = " + txtId.Text + " success");
+                        MessageBox.Show("Delete food with id = " + txtId.Text + " success"); 
                         loadData();
                     }
                 }

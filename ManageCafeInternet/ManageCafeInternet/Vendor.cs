@@ -21,6 +21,7 @@ namespace ManageCafeInternet
         {
             loadData();
             DisplayArea();
+            txtComputerId.Hide();
         }
 
         private void loadData()
@@ -52,14 +53,14 @@ namespace ManageCafeInternet
                 if (dgvComputers.CurrentRow != null)
                 {
                     DataGridViewRow row = dgvComputers.CurrentRow;
-                    cmsOptions.Show(); 
+                    cmsOptions.Show(Cursor.Position);
                 }
             }
         }
 
         private void btnTurnOnComputer_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void loadComputerDetail()
@@ -78,7 +79,7 @@ namespace ManageCafeInternet
 
         private void btnAddFoods_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void tsmiTurnOn_Click(object sender, EventArgs e)
@@ -133,15 +134,44 @@ namespace ManageCafeInternet
 
         private void tsmiCheckout_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
-            MessageBox.Show(now.ToString());
-            int computerId = Convert.ToInt32(txtComputerId.Text);
-            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            var a = mci.getComputerToCheckout(computerId);
-            if (a != null)
+            if (dgvComputers.CurrentRow != null)
             {
-                mci.checkoutComputer(now, computerId);
+                DataGridViewRow row = dgvComputers.CurrentRow;
+                if (row.Cells[4].Value.ToString() == "Using")
+                {
+                    DateTime now = DateTime.Now;
+                    int computerId = Convert.ToInt32(txtComputerId.Text);
+                    ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                    var a = mci.getComputerToCheckout(computerId);
+                    if (a != null)
+                    {
+                        var computerStatusId = mci.getComputerStatusId(Convert.ToInt32(this.txtComputerId.Text)).FirstOrDefault();
+                        mci.checkoutComputer(now, computerId);
+                        mci.updateComputerStatusTurnOff(computerId);
+                        Order o = new Order();
+                        o.txtComputerId.Text = this.txtComputerId.Text;
+                        o.txtComputerStatusId.Text = Convert.ToString(computerStatusId.entity_id);
+                        o.lblGrandTotal.Text = (mci.useTimeToOrder(computerId) + mci.selectedFoodsToOrder(computerId, computerStatusId.entity_id)).ToString();
+                        o.Show();
+                        loadData();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Computer with id = " + txtComputerId.Text + " is not using");
+                }
             }
+        }
+
+        private void txtSearchName_TextChanged(object sender, EventArgs e)
+        {
+            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+            dgvComputers.DataSource = mci.searchComputerName(txtSearchName.Text, Convert.ToInt32(cbxArea.SelectedValue));
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -55,9 +55,12 @@
             // 
             // dgvComputers
             // 
+            this.dgvComputers.AllowUserToAddRows = false;
+            this.dgvComputers.AllowUserToDeleteRows = false;
             this.dgvComputers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvComputers.Location = new System.Drawing.Point(12, 137);
             this.dgvComputers.Name = "dgvComputers";
+            this.dgvComputers.ReadOnly = true;
             this.dgvComputers.Size = new System.Drawing.Size(762, 301);
             this.dgvComputers.TabIndex = 1;
             this.dgvComputers.Click += new System.EventHandler(this.dgvComputers_Click);
@@ -163,6 +166,7 @@
             this.Controls.Add(this.lblComputerName);
             this.Controls.Add(this.dgvComputers);
             this.Controls.Add(this.cbxArea);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ComputerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ComputerForm";

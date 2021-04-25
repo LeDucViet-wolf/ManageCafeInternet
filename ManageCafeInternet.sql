@@ -12,7 +12,8 @@ CREATE TABLE [area]
 (
 	entity_id INT PRIMARY KEY IDENTITY,
 	name NVARCHAR(255) NOT NULL,
-	price FLOAT NOT NULL
+	price FLOAT NOT NULL,
+	price_turn_on FLOAT NOT NULL
 )
 GO
 CREATE TABLE [role]
@@ -27,7 +28,6 @@ CREATE TABLE [food]
 	name NVARCHAR(255) NOT NULL,
 	price FLOAT NOT NULL,
 	quantity INT NOT NULL,
-	image VARCHAR(255) NOT NULL,
 	food_type_id INT NOT NULL,
 	FOREIGN KEY (food_type_id) REFERENCES [food_type](entity_id)
 )
@@ -88,14 +88,14 @@ INSERT INTO [food_type] VALUES
 	(N'Đồ uống')
 GO
 INSERT INTO [food] VALUES
-	(N'Mỳ tôm trứng', 20000, 10, '',1),
-	(N'Sting đỏ', 15000, 20, '',2)
+	(N'Mỳ tôm trứng', 20000, 10,1),
+	(N'Sting đỏ', 15000, 20,2)
 GO
 INSERT INTO [area] VALUES
-	(N'Khu hút thuốc',3000),
-	(N'Khu bình dân', 5000),
-	(N'Khu VIP', 7000),
-	(N'Khu máy thi đấu', 10000)
+	(N'Khu hút thuốc',3000,1000),
+	(N'Khu bình dân', 5000,2000),
+	(N'Khu VIP', 7000,3000),
+	(N'Khu máy thi đấu', 10000,4000)
 GO
 CREATE PROC [getUser]
 @account VARCHAR(255), @password VARCHAR(255)
@@ -105,20 +105,19 @@ GO
 CREATE PROC [getAllFoods]
 AS 
 SELECT	[food].entity_id,
-		[food].name AS 'Foods Name', 
+		[food].name, 
 		[food].price,
 		[food].quantity,
-		[food].image,
 		[food].food_type_id,
-		[food_type].name AS 'Foods Type'
+		[food_type].name AS 'type'
 FROM [food] 
 LEFT JOIN [food_type] 
 ON food.food_type_id = food_type.entity_id 
 GO
 CREATE PROC [addFood]
-@name NVARCHAR(255), @price FLOAT, @quantity INT, @image VARCHAR(255), @foodTypeId INT
+@name NVARCHAR(255), @price FLOAT, @quantity INT, @foodTypeId INT
 AS
-INSERT INTO [food](name, price, quantity, image, food_type_id) VALUES (@name, @price, @quantity, @image, @foodTypeId)
+INSERT INTO [food](name, price, quantity, food_type_id) VALUES (@name, @price, @quantity, @foodTypeId)
 GO
 INSERT INTO [computer](name,status,area_id) VALUES
 	('PC-01',0,1),
@@ -137,13 +136,12 @@ SELECT	[food_type].entity_id AS 'food_type_id',
 FROM [food_type]
 GO
 CREATE PROC [updateFood]
-@entity_id INT, @name NVARCHAR(255), @price FLOAT, @quantity INT, @image VARCHAR(255), @foodTypeId INT
+@entity_id INT, @name NVARCHAR(255), @price FLOAT, @quantity INT, @foodTypeId INT
 AS
 UPDATE [food] 
 SET	name = @name, 
 	price = @price,
 	quantity = @quantity,
-	image = @image,
 	food_type_id = @foodTypeId
 WHERE entity_id = @entity_id
 GO					
@@ -288,7 +286,8 @@ AS
 SELECT	[foods_ordered].food_id,
 		[food].name,
 		[foods_ordered].qty,
-		[food].price
+		[food].price,
+		([foods_ordered].qty * [food].price) AS 'total_row'
 FROM [foods_ordered]
 JOIN [food]
 ON [foods_ordered].food_id = [food].entity_id
@@ -314,7 +313,84 @@ GO
 CREATE PROC [checkoutComputer]
 @endTime DATETIME, @computerId INT
 AS
+BEGIN
 UPDATE [computer_status] 
 SET [computer_status].end_time = @endTime
 WHERE [computer_status].entity_id = (SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].end_time IS NULL AND [computer_status].computer_id = @computerId ORDER BY [computer_status].start_time DESC)
-select*from computer_status
+END
+GO
+CREATE PROC [updateComputerStatusTurnOff]
+@computerId INT
+AS 
+UPDATE [computer]
+SET status = 0
+WHERE entity_id = @computerId
+GO
+CREATE PROC [selectedFoodsToOrder]
+(@computerId INT, @computerStatusId INT)
+AS
+DECLARE @foodsPrice FLOAT
+IF EXISTS (SELECT [foods_ordered].food_id,[food].name,[foods_ordered].qty,[food].price FROM [foods_ordered] JOIN [food] ON [foods_ordered].food_id = [food].entity_id WHERE [foods_ordered].computer_id = @computerId AND [foods_ordered].computer_status_id = @computerStatusId)
+BEGIN
+	SET @foodsPrice = (SELECT SUM([foods_ordered].qty * [food].price) FROM [foods_ordered] JOIN [food] ON [foods_ordered].food_id = [food].entity_id WHERE [foods_ordered].computer_id = @computerId AND [foods_ordered].computer_status_id = @computerStatusId)
+END
+ELSE
+BEGIN
+	SET @foodsPrice = 0
+END
+RETURN @foodsPrice
+GO
+CREATE PROC [useTimeToOrder]
+@computerId INT
+AS
+DECLARE @timeUse INT, @useTimePrice FLOAT;
+SET @timeUse = (SELECT DATEDIFF(MINUTE,[computer_status].start_time,[computer_status].end_time) FROM [computer_status] WHERE [computer_status].entity_id = (SELECT TOP(1) [computer_status].entity_id FROM [computer_status] WHERE [computer_status].computer_id = @computerId AND [computer_status].end_time IS NOT NULL ORDER BY [computer_status].entity_id DESC));
+IF @timeUse < 15
+BEGIN
+	SET @useTimePrice =		(SELECT [area].price_turn_on 
+							FROM [computer_status] JOIN [computer] ON [computer].entity_id = [computer_status].computer_id 
+							JOIN [area] ON [area].entity_id = [computer].area_id
+							WHERE [computer_status].entity_id =		(
+																	SELECT TOP(1) [computer_status].entity_id 
+																	FROM [computer_status] 
+																	WHERE [computer_status].computer_id = @computerId 
+																	AND [computer_status].end_time IS NOT NULL 
+																	ORDER BY [computer_status].entity_id DESC)
+																	)
+END 
+ELSE 
+BEGIN
+	SET @useTimePrice =		(SELECT ROUND([area].price * @timeUse/60, 0) 
+							FROM [computer_status] JOIN [computer] ON [computer].entity_id = [computer_status].computer_id 
+							JOIN [area] ON [area].entity_id = [computer].area_id
+							WHERE [computer_status].entity_id =		(
+																	SELECT TOP(1) [computer_status].entity_id 
+																	FROM [computer_status] 
+																	WHERE [computer_status].computer_id = @computerId 
+																	AND [computer_status].end_time IS NOT NULL 
+																	ORDER BY [computer_status].entity_id DESC)
+																	)
+END
+RETURN @useTimePrice
+GO
+CREATE PROC [useTime]
+@computerId INT
+AS
+SELECT [computer_status].start_time,[computer_status].end_time, [area].price, [area].price_turn_on 
+FROM [computer_status] 
+JOIN [computer] ON [computer_status].computer_id = [computer].entity_id
+JOIN [area] ON [computer].area_id = [area].entity_id
+WHERE [computer_status].entity_id =		(
+																	SELECT TOP(1) [computer_status].entity_id 
+																	FROM [computer_status] 
+																	WHERE [computer_status].computer_id = @computerId 
+																	AND [computer_status].end_time IS NOT NULL 
+																	ORDER BY [computer_status].entity_id DESC)
+GO
+CREATE PROC [searchComputerName]
+@name VARCHAR(255), @areaId INT
+AS
+SELECT [computer].entity_id, [computer].name, [area].price, [area].price_turn_on, [computer].status
+FROM [computer] 
+JOIN [area] ON [computer].area_id = [area].entity_id
+WHERE [computer].name LIKE '%' + @name + '%' AND [computer].area_id = @areaId

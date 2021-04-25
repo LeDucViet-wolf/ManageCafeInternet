@@ -161,9 +161,12 @@
             // 
             // dgvUsers
             // 
+            this.dgvUsers.AllowUserToAddRows = false;
+            this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Location = new System.Drawing.Point(420, 80);
             this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.ReadOnly = true;
             this.dgvUsers.Size = new System.Drawing.Size(811, 427);
             this.dgvUsers.TabIndex = 12;
             this.dgvUsers.Click += new System.EventHandler(this.dgvUsers_Click);
@@ -222,6 +225,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUserId);
             this.Controls.Add(this.lblUserId);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UserForm";
             this.Text = "UserForm";
             this.Load += new System.EventHandler(this.UserForm_Load);
