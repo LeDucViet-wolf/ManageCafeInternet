@@ -132,6 +132,8 @@
             this.Controls.Add(this.txtComputerId);
             this.Controls.Add(this.cbxArea);
             this.Controls.Add(this.dgvComputers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Vendor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vendor";

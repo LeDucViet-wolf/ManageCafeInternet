@@ -159,10 +159,10 @@ GO
 CREATE PROC [getAllComputersFromArea]
 @area_id INT 
 AS
-SELECT	[computer].entity_id AS 'Computer Id',
-		[computer].name AS 'Computer Name',
-		[area].name AS 'Area',
-		[area].price,
+SELECT	[computer].entity_id, 
+		[computer].name, 
+		[area].price, 
+		[area].price_turn_on, 
 		CASE WHEN [computer].status = 0 THEN 'Not using'
 			 WHEN [computer].status = 1 THEN 'Using'
 		END AS 'Computer Status'
@@ -173,10 +173,10 @@ WHERE area.entity_id = @area_id
 GO
 CREATE PROC [getAllComputers]
 AS
-SELECT	[computer].entity_id AS 'Computer Id',
-		[computer].name AS 'Computer Name',
-		[area].name AS 'Area',
-		[area].price,
+SELECT	[computer].entity_id, 
+		[computer].name, 
+		[area].price, 
+		[area].price_turn_on, 
 		CASE WHEN [computer].status = 0 THEN 'Not using'
 			 WHEN [computer].status = 1 THEN 'Using'
 		END AS 'Computer Status'
@@ -390,7 +390,13 @@ GO
 CREATE PROC [searchComputerName]
 @name VARCHAR(255), @areaId INT
 AS
-SELECT [computer].entity_id, [computer].name, [area].price, [area].price_turn_on, [computer].status
+SELECT	[computer].entity_id, 
+		[computer].name, 
+		[area].price, 
+		[area].price_turn_on, 
+		CASE WHEN [computer].status = 0 THEN 'Not using'
+			 WHEN [computer].status = 1 THEN 'Using'
+		END AS 'Computer Status'
 FROM [computer] 
 JOIN [area] ON [computer].area_id = [area].entity_id
 WHERE [computer].name LIKE '%' + @name + '%' AND [computer].area_id = @areaId

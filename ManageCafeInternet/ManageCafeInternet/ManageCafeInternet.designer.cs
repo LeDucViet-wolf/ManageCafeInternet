@@ -57,7 +57,7 @@ namespace ManageCafeInternet
     #endregion
 		
 		public ManageCafeInternetDataContext() : 
-				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString1, mappingSource)
+				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1780,13 +1780,13 @@ namespace ManageCafeInternet
 	public partial class getAllComputersResult
 	{
 		
-		private int _Computer_Id;
+		private int _entity_id;
 		
-		private string _Computer_Name;
-		
-		private string _Area;
+		private string _name;
 		
 		private double _price;
+		
+		private double _price_turn_on;
 		
 		private string _Computer_Status;
 		
@@ -1794,50 +1794,34 @@ namespace ManageCafeInternet
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Computer Id]", Storage="_Computer_Id", DbType="Int NOT NULL")]
-		public int Computer_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entity_id", DbType="Int NOT NULL")]
+		public int entity_id
 		{
 			get
 			{
-				return this._Computer_Id;
+				return this._entity_id;
 			}
 			set
 			{
-				if ((this._Computer_Id != value))
+				if ((this._entity_id != value))
 				{
-					this._Computer_Id = value;
+					this._entity_id = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Computer Name]", Storage="_Computer_Name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string Computer_Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._Computer_Name;
+				return this._name;
 			}
 			set
 			{
-				if ((this._Computer_Name != value))
+				if ((this._name != value))
 				{
-					this._Computer_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this._Area = value;
+					this._name = value;
 				}
 			}
 		}
@@ -1854,6 +1838,22 @@ namespace ManageCafeInternet
 				if ((this._price != value))
 				{
 					this._price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price_turn_on", DbType="Float NOT NULL")]
+		public double price_turn_on
+		{
+			get
+			{
+				return this._price_turn_on;
+			}
+			set
+			{
+				if ((this._price_turn_on != value))
+				{
+					this._price_turn_on = value;
 				}
 			}
 		}
@@ -1878,13 +1878,13 @@ namespace ManageCafeInternet
 	public partial class getAllComputersFromAreaResult
 	{
 		
-		private int _Computer_Id;
+		private int _entity_id;
 		
-		private string _Computer_Name;
-		
-		private string _Area;
+		private string _name;
 		
 		private double _price;
+		
+		private double _price_turn_on;
 		
 		private string _Computer_Status;
 		
@@ -1892,50 +1892,34 @@ namespace ManageCafeInternet
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Computer Id]", Storage="_Computer_Id", DbType="Int NOT NULL")]
-		public int Computer_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entity_id", DbType="Int NOT NULL")]
+		public int entity_id
 		{
 			get
 			{
-				return this._Computer_Id;
+				return this._entity_id;
 			}
 			set
 			{
-				if ((this._Computer_Id != value))
+				if ((this._entity_id != value))
 				{
-					this._Computer_Id = value;
+					this._entity_id = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Computer Name]", Storage="_Computer_Name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string Computer_Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
 		{
 			get
 			{
-				return this._Computer_Name;
+				return this._name;
 			}
 			set
 			{
-				if ((this._Computer_Name != value))
+				if ((this._name != value))
 				{
-					this._Computer_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Area
-		{
-			get
-			{
-				return this._Area;
-			}
-			set
-			{
-				if ((this._Area != value))
-				{
-					this._Area = value;
+					this._name = value;
 				}
 			}
 		}
@@ -1952,6 +1936,22 @@ namespace ManageCafeInternet
 				if ((this._price != value))
 				{
 					this._price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price_turn_on", DbType="Float NOT NULL")]
+		public double price_turn_on
+		{
+			get
+			{
+				return this._price_turn_on;
+			}
+			set
+			{
+				if ((this._price_turn_on != value))
+				{
+					this._price_turn_on = value;
 				}
 			}
 		}
@@ -2614,7 +2614,7 @@ namespace ManageCafeInternet
 		
 		private double _price_turn_on;
 		
-		private byte _status;
+		private string _Computer_Status;
 		
 		public searchComputerNameResult()
 		{
@@ -2684,18 +2684,18 @@ namespace ManageCafeInternet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="TinyInt NOT NULL")]
-		public byte status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Computer Status]", Storage="_Computer_Status", DbType="VarChar(9)")]
+		public string Computer_Status
 		{
 			get
 			{
-				return this._status;
+				return this._Computer_Status;
 			}
 			set
 			{
-				if ((this._status != value))
+				if ((this._Computer_Status != value))
 				{
-					this._status = value;
+					this._Computer_Status = value;
 				}
 			}
 		}

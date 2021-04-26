@@ -83,7 +83,7 @@ namespace ManageCafeInternet
                 txtName.Text = row.Cells[1].Value.ToString();
                 txtPrice.Text = row.Cells[2].Value.ToString();
                 txtQuantity.Text = row.Cells[3].Value.ToString();
-                cbxFoodType.SelectedValue = Convert.ToInt32(row.Cells[5].Value.ToString());
+                cbxFoodType.SelectedValue = Convert.ToInt32(row.Cells[4].Value.ToString());
             }
         }
 

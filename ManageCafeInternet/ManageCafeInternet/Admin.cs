@@ -23,6 +23,7 @@ namespace ManageCafeInternet
             
             FoodForm ff = new FoodForm();
             ff.TopLevel = false;
+            ff.Size = pnAdmin.Size;
             pnAdmin.Controls.Clear();
             ff.Dock = DockStyle.Fill;
             ff.Show();
@@ -45,6 +46,7 @@ namespace ManageCafeInternet
             this.pnAdmin.BackColor = System.Drawing.Color.White;
             UserForm uf = new UserForm();
             uf.TopLevel = false;
+            uf.Size = pnAdmin.Size;
             pnAdmin.Controls.Clear();
             uf.Dock = DockStyle.Fill;
             uf.Show();

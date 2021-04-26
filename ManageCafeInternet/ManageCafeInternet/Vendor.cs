@@ -58,11 +58,6 @@ namespace ManageCafeInternet
             }
         }
 
-        private void btnTurnOnComputer_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loadComputerDetail()
         {
             if (dgvComputers.CurrentRow != null)
@@ -75,11 +70,6 @@ namespace ManageCafeInternet
         private void dgvComputers_Click(object sender, EventArgs e)
         {
             loadComputerDetail();
-        }
-
-        private void btnAddFoods_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void tsmiTurnOn_Click(object sender, EventArgs e)

@@ -47,3 +47,4 @@ C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInte
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Vendor.resources
 C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.csproj.CopyComplete
 C:\Users\WOLF\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Order.resources
+C:\Users\ADMIN\source\repos\ManageCafeInternet\ManageCafeInternet\ManageCafeInternet\obj\Debug\ManageCafeInternet.Order.resources

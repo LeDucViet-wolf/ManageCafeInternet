@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManageCafeInternet" Class="ManageCafeInternetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security Info=True;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAB3_PC07;Initial Catalog=ManageCafeInternet;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.area" Member="areas">
     <Type Name="area">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -135,20 +135,20 @@
   </Function>
   <Function Name="dbo.getAllComputers" Method="getAllComputers">
     <ElementType Name="getAllComputersResult">
-      <Column Name="[Computer Id]" Member="Computer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="[Computer Name]" Member="Computer_Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Area" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="price_turn_on" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="[Computer Status]" Member="Computer_Status" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.getAllComputersFromArea" Method="getAllComputersFromArea">
     <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="getAllComputersFromAreaResult">
-      <Column Name="[Computer Id]" Member="Computer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="[Computer Name]" Member="Computer_Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Area" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="price_turn_on" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="[Computer Status]" Member="Computer_Status" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
     </ElementType>
   </Function>
@@ -235,7 +235,7 @@
       <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="price_turn_on" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="[Computer Status]" Member="Computer_Status" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.selectedFoodsToOrder" Method="selectedFoodsToOrder">
