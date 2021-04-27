@@ -121,6 +121,9 @@
   <data name="admin_food" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\admin_food.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="loggin_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loggin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="loggin_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loggin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,10 +139,13 @@
   <data name="admin_computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\admin_computer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="area" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\area.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="admin_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\admin_user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="loggin_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loggin_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\report.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

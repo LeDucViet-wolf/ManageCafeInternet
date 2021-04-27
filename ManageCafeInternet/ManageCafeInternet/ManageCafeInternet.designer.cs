@@ -57,7 +57,7 @@ namespace ManageCafeInternet
     #endregion
 		
 		public ManageCafeInternetDataContext() : 
-				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString2, mappingSource)
+				base(global::ManageCafeInternet.Properties.Settings.Default.ManageCafeInternetConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -158,10 +158,10 @@ namespace ManageCafeInternet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addComputer")]
-		public int addComputer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string computer_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> area_id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addArea")]
+		public int addArea([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price_turn_on)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computer_name, area_id);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, price, price_turn_on);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -169,6 +169,13 @@ namespace ManageCafeInternet
 		public int useTimeToOrder([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addComputer")]
+		public int addComputer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string computer_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> area_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computer_name, area_id);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -200,10 +207,24 @@ namespace ManageCafeInternet
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteArea")]
+		public int deleteArea([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> areaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), areaId);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComputer")]
 		public int deleteComputer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> entity_id)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), entity_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComputerByArea")]
+		public int deleteComputerByArea([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> areaId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), areaId);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -226,6 +247,13 @@ namespace ManageCafeInternet
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<getAllAreasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllAreasAdmin")]
+		public ISingleResult<getAllAreasAdminResult> getAllAreasAdmin()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<getAllAreasAdminResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComputers")]
@@ -305,6 +333,13 @@ namespace ManageCafeInternet
 			return ((ISingleResult<getUserFromRoleResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.saveToOrder")]
+		public int saveToOrder([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerStatusId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerStatusId);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.searchComputerName")]
 		public ISingleResult<searchComputerNameResult> searchComputerName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> areaId)
 		{
@@ -316,6 +351,13 @@ namespace ManageCafeInternet
 		public int selectedFoodsToOrder([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> computerStatusId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), computerId, computerStatusId);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateArea")]
+		public int updateArea([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> areaId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(255)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> price_turn_on)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), areaId, name, price, price_turn_on);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -1772,6 +1814,86 @@ namespace ManageCafeInternet
 				if ((this._area_name != value))
 				{
 					this._area_name = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getAllAreasAdminResult
+	{
+		
+		private int _entity_id;
+		
+		private string _name;
+		
+		private double _price;
+		
+		private double _price_turn_on;
+		
+		public getAllAreasAdminResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entity_id", DbType="Int NOT NULL")]
+		public int entity_id
+		{
+			get
+			{
+				return this._entity_id;
+			}
+			set
+			{
+				if ((this._entity_id != value))
+				{
+					this._entity_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price", DbType="Float NOT NULL")]
+		public double price
+		{
+			get
+			{
+				return this._price;
+			}
+			set
+			{
+				if ((this._price != value))
+				{
+					this._price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_price_turn_on", DbType="Float NOT NULL")]
+		public double price_turn_on
+		{
+			get
+			{
+				return this._price_turn_on;
+			}
+			set
+			{
+				if ((this._price_turn_on != value))
+				{
+					this._price_turn_on = value;
 				}
 			}
 		}

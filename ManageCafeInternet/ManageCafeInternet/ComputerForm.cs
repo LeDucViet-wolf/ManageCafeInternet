@@ -63,46 +63,52 @@ namespace ManageCafeInternet
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            string name = txtComputerName.Text;
-            int areaId = Convert.ToInt32(cbxArea.SelectedValue.ToString());
-            try
+            if (this.validate() == true)
             {
-                mci.addComputer(name, areaId);
-                MessageBox.Show("Add computer success");
-                loadData();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Something went wrong when add computer");
+                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                string name = txtComputerName.Text;
+                int areaId = Convert.ToInt32(cbxArea.SelectedValue.ToString());
+                try
+                {
+                    mci.addComputer(name, areaId);
+                    MessageBox.Show("Add computer success");
+                    loadData();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong when add computer");
+                }
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (this.validate() == true)
             {
-                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-                var f = mci.computers.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtComputerId.Text));
-                if (f != null)
+                if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    try
+                    ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                    var f = mci.computers.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtComputerId.Text));
+                    if (f != null)
                     {
-                        int id = Convert.ToInt32(txtComputerId.Text);
-                        string name = txtComputerName.Text;
-                        int areaId = Convert.ToInt32(cbxArea.SelectedValue.ToString());
-                        mci.updateComputer(id, name, areaId);
-                        MessageBox.Show("Update food with id = " + txtComputerId.Text + " success");
-                        loadData();
+                        try
+                        {
+                            int id = Convert.ToInt32(txtComputerId.Text);
+                            string name = txtComputerName.Text;
+                            int areaId = Convert.ToInt32(cbxArea.SelectedValue.ToString());
+                            mci.updateComputer(id, name, areaId);
+                            MessageBox.Show("Update food with id = " + txtComputerId.Text + " success");
+                            loadData();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Something went wrong while update computer have id equal = " + txtComputerId.Text);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Something went wrong while update computer have id equal = " + txtComputerId.Text);
+                        MessageBox.Show("Can't find data with computer have id equal = " + txtComputerId.Text, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Can't find data with computer have id equal = " + txtComputerId.Text, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -132,6 +138,19 @@ namespace ManageCafeInternet
             {
                 MessageBox.Show("Can't find data with computer have id equal = " + txtComputerId.Text, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private bool validate()
+        {
+            if (txtComputerName.Text == "")
+            {
+                MessageBox.Show("Computer name can't be null");
+            }
+            else
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

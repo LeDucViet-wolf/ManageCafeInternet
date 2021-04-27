@@ -37,6 +37,8 @@
             this.lblGrandTotal = new System.Windows.Forms.Label();
             this.txtComputerStatusId = new System.Windows.Forms.TextBox();
             this.txtComputerId = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTotalTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFoods)).BeginInit();
             this.SuspendLayout();
@@ -115,7 +117,7 @@
             // txtComputerStatusId
             // 
             this.txtComputerStatusId.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComputerStatusId.Location = new System.Drawing.Point(235, 306);
+            this.txtComputerStatusId.Location = new System.Drawing.Point(249, 12);
             this.txtComputerStatusId.Name = "txtComputerStatusId";
             this.txtComputerStatusId.ReadOnly = true;
             this.txtComputerStatusId.Size = new System.Drawing.Size(207, 31);
@@ -124,17 +126,38 @@
             // txtComputerId
             // 
             this.txtComputerId.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComputerId.Location = new System.Drawing.Point(22, 306);
+            this.txtComputerId.Location = new System.Drawing.Point(22, 12);
             this.txtComputerId.Name = "txtComputerId";
             this.txtComputerId.ReadOnly = true;
             this.txtComputerId.Size = new System.Drawing.Size(207, 31);
             this.txtComputerId.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(174, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(154, 33);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Total Time";
+            // 
+            // lblTotalTime
+            // 
+            this.lblTotalTime.AutoSize = true;
+            this.lblTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTime.Location = new System.Drawing.Point(338, 303);
+            this.lblTotalTime.Name = "lblTotalTime";
+            this.lblTotalTime.Size = new System.Drawing.Size(0, 33);
+            this.lblTotalTime.TabIndex = 24;
             // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 406);
+            this.Controls.Add(this.lblTotalTime);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtComputerStatusId);
             this.Controls.Add(this.txtComputerId);
             this.Controls.Add(this.lblGrandTotal);
@@ -144,6 +167,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTime);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "Order";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
@@ -166,5 +191,7 @@
         public System.Windows.Forms.Label lblGrandTotal;
         public System.Windows.Forms.TextBox txtComputerStatusId;
         public System.Windows.Forms.TextBox txtComputerId;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label lblTotalTime;
     }
 }

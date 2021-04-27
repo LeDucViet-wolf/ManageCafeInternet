@@ -400,3 +400,34 @@ SELECT	[computer].entity_id,
 FROM [computer] 
 JOIN [area] ON [computer].area_id = [area].entity_id
 WHERE [computer].name LIKE '%' + @name + '%' AND [computer].area_id = @areaId
+GO
+CREATE PROC [getAllAreasAdmin]
+AS
+SELECT * FROM [area]
+GO
+CREATE PROC [addArea]
+@name NVARCHAR(255), @price FLOAT, @price_turn_on FLOAT
+AS
+INSERT INTO [area] VALUES (@name, @price, @price_turn_on)
+GO
+CREATE PROC [updateArea]
+@areaId INT, @name NVARCHAR(255), @price FLOAT, @price_turn_on FLOAT
+AS
+UPDATE [area]
+SET	name = @name, price = @price, price_turn_on = @price_turn_on
+WHERE entity_id = @areaId
+GO
+CREATE PROC [deleteArea]
+@areaId INT
+AS
+DELETE [area] WHERE entity_id = @areaId
+GO
+CREATE PROC [deleteComputerByArea]
+@areaId INT
+AS
+DELETE [computer] WHERE [computer].area_id = @areaId
+GO
+CREATE PROC [saveToOrder]
+@computerStatusId INT
+AS
+INSERT INTO [order] VALUES (@computerStatusId)

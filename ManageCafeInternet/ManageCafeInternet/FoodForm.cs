@@ -24,7 +24,6 @@ namespace ManageCafeInternet
 
         private void loadData()
         {
-            txtId.ReadOnly = true;
             DisplayFoodTypes();
             DisplayFoods();
         }
@@ -47,20 +46,23 @@ namespace ManageCafeInternet
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            string name = txtName.Text;
-            double price = Convert.ToDouble(txtPrice.Text);
-            int quantity = Convert.ToInt32(txtQuantity.Text);
-            int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
-            try
+            if (this.validate() == true)
             {
-                mci.addFood(name, price, quantity, foodTypeId);
-                MessageBox.Show("Add food success");
-                loadData();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Something went wrong when add food");
+                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                string name = txtName.Text;
+                double price = Convert.ToDouble(txtPrice.Text);
+                int quantity = Convert.ToInt32(txtQuantity.Text);
+                int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
+                try
+                {
+                    mci.addFood(name, price, quantity, foodTypeId);
+                    MessageBox.Show("Add food success");
+                    loadData();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong when add food");
+                }
             }
         }
 
@@ -94,31 +96,34 @@ namespace ManageCafeInternet
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (this.validate() == true)
             {
-                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-                var f = mci.foods.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtId.Text));
-                if (f != null)
+                if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    try
+                    ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                    var f = mci.foods.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtId.Text));
+                    if (f != null)
                     {
-                        int id = Convert.ToInt32(txtId.Text);
-                        string name = txtName.Text;
-                        double price = Convert.ToDouble(txtPrice.Text);
-                        int quantity = Convert.ToInt32(txtQuantity.Text);
-                        int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
-                        mci.updateFood(id, name, price, quantity, foodTypeId);
-                        MessageBox.Show("Update food with id = " + txtId.Text + " success");
-                        loadData();
+                        try
+                        {
+                            int id = Convert.ToInt32(txtId.Text);
+                            string name = txtName.Text;
+                            double price = Convert.ToDouble(txtPrice.Text);
+                            int quantity = Convert.ToInt32(txtQuantity.Text);
+                            int foodTypeId = Convert.ToInt32(cbxFoodType.SelectedValue.ToString());
+                            mci.updateFood(id, name, price, quantity, foodTypeId);
+                            MessageBox.Show("Update food with id = " + txtId.Text + " success");
+                            loadData();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Something went wrong while update food have id equal = " + txtId.Text);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Something went wrong while update food have id equal = " + txtId.Text);
+                        MessageBox.Show("Can't find data with food have id equal = " + txtId.Text, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Can't find data with food have id equal = " + txtId.Text, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -134,7 +139,7 @@ namespace ManageCafeInternet
                     if (f != null)
                     {
                         mci.deleteFood(Convert.ToInt32(txtId.Text));
-                        MessageBox.Show("Delete food with id = " + txtId.Text + " success"); 
+                        MessageBox.Show("Delete food with id = " + txtId.Text + " success");
                         loadData();
                     }
                 }
@@ -143,6 +148,36 @@ namespace ManageCafeInternet
             {
                 MessageBox.Show("Can't find data with food have id equal = " + txtId.Text, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private bool validate()
+        {
+            int result;
+            if (txtName.Text == "")
+            {
+                MessageBox.Show("Name can't be null");
+            }
+            else if (txtPrice.Text == "")
+            {
+                MessageBox.Show("Price can't be null");
+            }
+            else if (txtQuantity.Text == "")
+            {
+                MessageBox.Show("Quantity can't be null");
+            }
+            else if (!int.TryParse(txtPrice.Text, out result))
+            {
+                MessageBox.Show("Price can't be string");
+            }
+            else if (!int.TryParse(txtQuantity.Text, out result))
+            {
+                MessageBox.Show("Quantity can't be string");
+            }
+            else
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -138,9 +138,11 @@ namespace ManageCafeInternet
                         var computerStatusId = mci.getComputerStatusId(Convert.ToInt32(this.txtComputerId.Text)).FirstOrDefault();
                         mci.checkoutComputer(now, computerId);
                         mci.updateComputerStatusTurnOff(computerId);
+                        mci.saveToOrder(computerStatusId.entity_id);
                         Order o = new Order();
                         o.txtComputerId.Text = this.txtComputerId.Text;
                         o.txtComputerStatusId.Text = Convert.ToString(computerStatusId.entity_id);
+                        o.lblTotalTime.Text = mci.useTimeToOrder(computerId).ToString();
                         o.lblGrandTotal.Text = (mci.useTimeToOrder(computerId) + mci.selectedFoodsToOrder(computerId, computerStatusId.entity_id)).ToString();
                         o.Show();
                         loadData();

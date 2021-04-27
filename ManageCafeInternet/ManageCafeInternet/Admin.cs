@@ -35,6 +35,7 @@ namespace ManageCafeInternet
             this.pnAdmin.BackColor = System.Drawing.Color.White;
             ComputerForm cf = new ComputerForm();
             cf.TopLevel = false;
+            cf.Size = pnAdmin.Size;
             pnAdmin.Controls.Clear();
             cf.Dock = DockStyle.Fill;
             cf.Show();
@@ -56,6 +57,30 @@ namespace ManageCafeInternet
         private void tsmlLogOut_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tsmiArea_Click(object sender, EventArgs e)
+        {
+            this.pnAdmin.BackColor = System.Drawing.Color.White;
+            AreaForm af = new AreaForm();
+            af.TopLevel = false;
+            af.Size = pnAdmin.Size;
+            pnAdmin.Controls.Clear();
+            af.Dock = DockStyle.Fill;
+            af.Show();
+            pnAdmin.Controls.Add(af);
+        }
+
+        private void tsmiReport_Click(object sender, EventArgs e)
+        {
+            this.pnAdmin.BackColor = System.Drawing.Color.White;
+            Report r = new Report();
+            r.TopLevel = false;
+            r.Size = pnAdmin.Size;
+            pnAdmin.Controls.Clear();
+            r.Dock = DockStyle.Fill;
+            r.Show();
+            pnAdmin.Controls.Add(r);
         }
     }
 }

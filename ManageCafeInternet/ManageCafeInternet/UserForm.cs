@@ -19,21 +19,24 @@ namespace ManageCafeInternet
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-            string account = txtAccount.Text;
-            string password = txtPassword.Text;
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
-            int areaId = Convert.ToInt32(cbxRoles.SelectedValue.ToString());
-            try
+            if (this.validate() == true)
             {
-                mci.addUser(account, password, firstName, lastName, areaId);
-                MessageBox.Show("Add user success");
-                loadData();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Something went wrong when add user");
+                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                string account = txtAccount.Text;
+                string password = txtPassword.Text;
+                string firstName = txtFirstName.Text;
+                string lastName = txtLastName.Text;
+                int areaId = Convert.ToInt32(cbxRoles.SelectedValue.ToString());
+                try
+                {
+                    mci.addUser(account, password, firstName, lastName, areaId);
+                    MessageBox.Show("Add user success");
+                    loadData();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong when add user");
+                }
             }
         }
 
@@ -80,32 +83,35 @@ namespace ManageCafeInternet
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (this.validate() == true)
             {
-                ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
-                var f = mci.users.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtUserId.Text));
-                if (f != null)
+                if (MessageBox.Show("Are you sure want to update?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    try
+                    ManageCafeInternetDataContext mci = new ManageCafeInternetDataContext();
+                    var f = mci.users.FirstOrDefault(x => x.entity_id == Convert.ToInt32(txtUserId.Text));
+                    if (f != null)
                     {
-                        int id = Convert.ToInt32(txtUserId.Text);
-                        string account = txtAccount.Text;
-                        string password = txtPassword.Text;
-                        string firstName = txtFirstName.Text;
-                        string lastName = txtLastName.Text;
-                        int roleId = Convert.ToInt32(cbxRoles.SelectedValue.ToString());
-                        mci.updateUser(id, account, password, firstName, lastName, roleId);
-                        MessageBox.Show("Update user with id = " + txtUserId.Text + " success");
-                        loadData();
+                        try
+                        {
+                            int id = Convert.ToInt32(txtUserId.Text);
+                            string account = txtAccount.Text;
+                            string password = txtPassword.Text;
+                            string firstName = txtFirstName.Text;
+                            string lastName = txtLastName.Text;
+                            int roleId = Convert.ToInt32(cbxRoles.SelectedValue.ToString());
+                            mci.updateUser(id, account, password, firstName, lastName, roleId);
+                            MessageBox.Show("Update user with id = " + txtUserId.Text + " success");
+                            loadData();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Something went wrong while update user have id equal = " + txtUserId.Text);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Something went wrong while update user have id equal = " + txtUserId.Text);
+                        MessageBox.Show("Can't find data with user have id equal = " + txtUserId.Text, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Can't find data with user have id equal = " + txtUserId.Text, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -135,6 +141,31 @@ namespace ManageCafeInternet
         private void dgvUsers_Click(object sender, EventArgs e)
         {
             loadUserDetail();
+        }
+
+        private bool validate()
+        {
+            if (txtAccount.Text == "")
+            {
+                MessageBox.Show("Account can't be null");
+            }
+            else if (txtPassword.Text == "")
+            {
+                MessageBox.Show("Pass can't be null");
+            }
+            else if (txtFirstName.Text == "")
+            {
+                MessageBox.Show("First Name turn on can't be null");
+            }
+            else if (txtLastName.Text == "")
+            {
+                MessageBox.Show("Last Name turn on can't be null");
+            }
+            else
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

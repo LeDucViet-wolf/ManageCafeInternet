@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.pnAdmin = new System.Windows.Forms.Panel();
             this.tsmiFoods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiComputers = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsiUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiArea = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiReport = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmlLogOut = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnAdmin = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,12 +45,22 @@
             this.tsmiFoods,
             this.tsmiComputers,
             this.tmsiUsers,
+            this.tsmiArea,
+            this.tsmiReport,
             this.tsmlLogOut});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1224, 56);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // pnAdmin
+            // 
+            this.pnAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnAdmin.Location = new System.Drawing.Point(0, 56);
+            this.pnAdmin.Name = "pnAdmin";
+            this.pnAdmin.Size = new System.Drawing.Size(1224, 564);
+            this.pnAdmin.TabIndex = 1;
             // 
             // tsmiFoods
             // 
@@ -77,6 +89,24 @@
             this.tmsiUsers.Text = "Manage Users";
             this.tmsiUsers.Click += new System.EventHandler(this.tmsiUsers_Click);
             // 
+            // tsmiArea
+            // 
+            this.tsmiArea.Image = global::ManageCafeInternet.Properties.Resources.area;
+            this.tsmiArea.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiArea.Name = "tsmiArea";
+            this.tsmiArea.Size = new System.Drawing.Size(142, 52);
+            this.tsmiArea.Text = "Manage Areas";
+            this.tsmiArea.Click += new System.EventHandler(this.tsmiArea_Click);
+            // 
+            // tsmiReport
+            // 
+            this.tsmiReport.Image = global::ManageCafeInternet.Properties.Resources.report;
+            this.tsmiReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiReport.Name = "tsmiReport";
+            this.tsmiReport.Size = new System.Drawing.Size(102, 52);
+            this.tsmiReport.Text = "Report";
+            this.tsmiReport.Click += new System.EventHandler(this.tsmiReport_Click);
+            // 
             // tsmlLogOut
             // 
             this.tsmlLogOut.Image = global::ManageCafeInternet.Properties.Resources.loggin_button1;
@@ -86,14 +116,6 @@
             this.tsmlLogOut.Text = "Log Out";
             this.tsmlLogOut.Click += new System.EventHandler(this.tsmlLogOut_Click);
             // 
-            // pnAdmin
-            // 
-            this.pnAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnAdmin.Location = new System.Drawing.Point(0, 56);
-            this.pnAdmin.Name = "pnAdmin";
-            this.pnAdmin.Size = new System.Drawing.Size(1224, 564);
-            this.pnAdmin.TabIndex = 1;
-            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,6 +123,7 @@
             this.ClientSize = new System.Drawing.Size(1224, 620);
             this.Controls.Add(this.pnAdmin);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -120,5 +143,7 @@
         private System.Windows.Forms.ToolStripMenuItem tmsiUsers;
         private System.Windows.Forms.Panel pnAdmin;
         private System.Windows.Forms.ToolStripMenuItem tsmlLogOut;
+        private System.Windows.Forms.ToolStripMenuItem tsmiArea;
+        private System.Windows.Forms.ToolStripMenuItem tsmiReport;
     }
 }

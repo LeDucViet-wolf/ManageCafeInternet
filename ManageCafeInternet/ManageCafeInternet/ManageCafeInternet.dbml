@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ManageCafeInternet" Class="ManageCafeInternetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAB3_PC07;Initial Catalog=ManageCafeInternet;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UF6SFUN;Initial Catalog=ManageCafeInternet;Persist Security Info=True;User ID=sa" SettingsObjectName="ManageCafeInternet.Properties.Settings" SettingsPropertyName="ManageCafeInternetConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.area" Member="areas">
     <Type Name="area">
       <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -79,13 +79,19 @@
       <Association Name="role_user" Member="users" ThisKey="entity_id" OtherKey="role_id" Type="user" />
     </Type>
   </Table>
-  <Function Name="dbo.addComputer" Method="addComputer">
-    <Parameter Name="computer_name" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.addArea" Method="addArea">
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="price_turn_on" Type="System.Double" DbType="Float" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.useTimeToOrder" Method="useTimeToOrder">
     <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addComputer" Method="addComputer">
+    <Parameter Name="computer_name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="area_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.addFood" Method="addFood">
@@ -115,8 +121,16 @@
     <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.deleteArea" Method="deleteArea">
+    <Parameter Name="areaId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.deleteComputer" Method="deleteComputer">
     <Parameter Name="entity_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteComputerByArea" Method="deleteComputerByArea">
+    <Parameter Name="areaId" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.deleteFood" Method="deleteFood">
@@ -131,6 +145,14 @@
     <ElementType Name="getAllAreasResult">
       <Column Name="area_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="area_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getAllAreasAdmin" Method="getAllAreasAdmin">
+    <ElementType Name="getAllAreasAdminResult">
+      <Column Name="entity_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="price" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="price_turn_on" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.getAllComputers" Method="getAllComputers">
@@ -227,6 +249,10 @@
       <Column Name="role_name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.saveToOrder" Method="saveToOrder">
+    <Parameter Name="computerStatusId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.searchComputerName" Method="searchComputerName">
     <Parameter Name="name" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="areaId" Type="System.Int32" DbType="Int" />
@@ -241,6 +267,13 @@
   <Function Name="dbo.selectedFoodsToOrder" Method="selectedFoodsToOrder">
     <Parameter Name="computerId" Type="System.Int32" DbType="Int" />
     <Parameter Name="computerStatusId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateArea" Method="updateArea">
+    <Parameter Name="areaId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(255)" />
+    <Parameter Name="price" Type="System.Double" DbType="Float" />
+    <Parameter Name="price_turn_on" Type="System.Double" DbType="Float" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.updateComputer" Method="updateComputer">
